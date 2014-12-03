@@ -12,7 +12,7 @@ import org.androidannotations.annotations.rest.*;
  * Fragment to load and show KrombelStats
  */
 @EFragment(R.layout.krombel_stats)
-public class KrombelFragment extends Fragment{
+public class KrombelFragment extends Fragment {
     @ViewById
     TextView textCurrentNodesValue, textMaxNodesValue, textCurrentClientsValue, textMaxClientsValue;
 
@@ -37,6 +37,6 @@ public class KrombelFragment extends Fragment{
 
     @UiThread
     void bindValue(KrombelStat stat, TextView view) {
-        view.setText(""+stat.getCount());
+        view.setText("" + stat.getCount());
     }
 }

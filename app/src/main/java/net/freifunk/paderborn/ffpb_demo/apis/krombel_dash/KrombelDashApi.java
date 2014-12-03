@@ -10,10 +10,13 @@ import org.springframework.http.converter.json.*;
 public interface KrombelDashApi {
     @Get("aktNodecount.json")
     public KrombelStat currentNodeCount();
+
     @Get("aktClientcount.json")
     public KrombelStat currentClientCount();
+
     @Get("maxNodecount.json")
     public KrombelStat maximumNodeCount();
+
     @Get("maxClientcount.json")
     public KrombelStat maximumClientCount();
 }

@@ -9,6 +9,10 @@ public class KrombelStat {
     int count;
     Date timestamp;
 
+    public KrombelStat() {
+
+    }
+
     public int getCount() {
         return count;
     }
@@ -23,9 +27,5 @@ public class KrombelStat {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public KrombelStat() {
-
     }
 }
