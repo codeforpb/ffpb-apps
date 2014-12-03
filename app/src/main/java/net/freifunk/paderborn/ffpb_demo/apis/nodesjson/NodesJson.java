@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.ffpb_demo.json;
+package net.freifunk.paderborn.ffpb_demo.apis.nodesjson;
 
 import com.fasterxml.jackson.annotation.*;
 import com.noveogroup.android.log.*;
