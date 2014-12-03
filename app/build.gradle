@@ -28,6 +28,14 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'LICENSE.txt'
+    }
 }
 
 def AAVersion = '3.2'
