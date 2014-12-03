@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Krombel Stats:"
+        android:id="@+id/textKrombelHeader"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aktuelle Knotenanzahl: "
+        android:id="@+id/textCurrentNodes"
+        android:layout_below="@+id/textKrombelHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Knotenhighscore: "
+        android:id="@+id/textMaxNodes"
+        android:layout_below="@+id/textCurrentNodes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aktuelle Clientzahl: "
+        android:id="@+id/textCurrentClients"
+        android:layout_below="@+id/textMaxNodes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Client Highscore: "
+        android:id="@+id/textMaxClients"
+        android:layout_below="@+id/textCurrentClients"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="569"
+        android:id="@+id/textCurrentNodesValue"
+        android:layout_below="@+id/textKrombelHeader"
+        android:layout_toEndOf="@+id/textCurrentNodes"
+        android:layout_toRightOf="@+id/textCurrentNodes"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="2125"
+        android:id="@+id/textMaxNodesValue"
+        android:layout_below="@+id/textCurrentNodesValue"
+        android:layout_toRightOf="@+id/textCurrentNodes"
+        android:layout_toEndOf="@+id/textCurrentNodes"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="654"
+        android:id="@+id/textCurrentClientsValue"
+        android:layout_alignTop="@+id/textCurrentClients"
+        android:layout_alignLeft="@+id/textMaxNodesValue"
+        android:layout_alignStart="@+id/textMaxNodesValue"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="135"
+        android:id="@+id/textMaxClientsValue"
+        android:layout_below="@+id/textCurrentClientsValue"
+        android:layout_alignLeft="@+id/textCurrentClientsValue"
+        android:layout_alignStart="@+id/textCurrentClientsValue"/>
+</RelativeLayout>
