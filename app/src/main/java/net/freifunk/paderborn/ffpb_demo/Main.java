@@ -7,7 +7,7 @@ import org.androidannotations.annotations.*;
 /**
  * Created by ljan on 30.11.14.
  */
-@EActivity(R.layout.krombel_stats)
+@EActivity(R.layout.activity_main)
 public class Main extends ActionBarActivity{
 
 }
