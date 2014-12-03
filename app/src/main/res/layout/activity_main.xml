@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:background="@color/background_material_light"
+              android:elevation="0dp"
+              android:orientation="vertical"
+              android:padding="16dp"
 
-    <fragment
-        android:name="net.freifunk.paderborn.ffpb_demo.KrombelFragment_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+              android:translationZ="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <fragment
+                android:name="net.freifunk.paderborn.ffpb_demo.KrombelFragment_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/krombel_stats"/>
+            </FrameLayout>
 </LinearLayout>
