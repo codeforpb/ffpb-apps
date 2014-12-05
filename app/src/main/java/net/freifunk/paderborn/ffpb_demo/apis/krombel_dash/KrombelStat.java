@@ -8,9 +8,16 @@ import java.util.*;
 public class KrombelStat {
     int count;
     Date timestamp;
+    private KrombelStatType type;
 
     public KrombelStat() {
 
+    }
+
+    public KrombelStat(int count, Date timestamp, KrombelStatType type) {
+        this.count = count;
+        this.timestamp = timestamp;
+        this.type = type;
     }
 
     public int getCount() {
@@ -27,5 +34,13 @@ public class KrombelStat {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public KrombelStatType getType() {
+        return type;
+    }
+
+    public void setType(KrombelStatType type) {
+        this.type = type;
     }
 }
