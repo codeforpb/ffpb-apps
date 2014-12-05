@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{FFPB App collection demo}
+\newcommand{\krombel}{Krombel's Dash }
+\newcommand{\nodes}{nodes.json }
+\newcommand{\wifiMapper}{WiFi Mapper Extension }
+\begin{document}
+\maketitle
+
+\begin{abstract}
+ The goal of this project is to develop multiple apps that can interact with each other, either via Intents or data exchange (content providers). 
+\end{abstract}
+
+%\tableofcontents
+
+\section{Goals}
+\begin{enumerate}
+ \item Two different apps, that use the same Account in Android's Sync Framework.
+ \item A common navigation drawer for both apps
+\end{enumerate} 
+
+\section{\krombel} Shows data from \url{http://dashing.krombel.de/stats}
+\section{\nodes}
+Fetches data from \url{http://map.paderborn.freifunk.net/nodes.json}. Displays the status off all nodes.
+
+Steps:
+\begin{enumerate}
+ \item Display all nodes
+ \item ``Watch my nodes''
+ \item Integrate \wifiMapper
+\end{enumerate}
+
+
+\section{NavDrawer}
+ Used to implement the common navigation drawer. The drawer's content is created dynamically and depends on the other apps' availability, i.e.
+\begin{itemize}
+ \item \krombel navigation is only shown, if \krombel is installed
+ \item \nodes navigation is only shown, if \nodes is installed
+\end{itemize}
+
+\section{\wifiMapper}
+Not a stand-alone app. This app is used in the \nodes app to collect Wifi Stats and send them to a server. 
+
+\end{document}

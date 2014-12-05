@@ -8,3 +8,11 @@
 FFPB-Demo.iml
 gradle.properties
 *.iml
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.synctex.gz
+*.toc
