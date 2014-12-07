@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.apis.krombel_dash;
+package net.freifunk.paderborn.krombel.sync.api;
 
 import org.androidannotations.annotations.rest.Get;
 import org.androidannotations.annotations.rest.Rest;

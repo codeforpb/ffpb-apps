@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.apis.krombel_dash;
+package net.freifunk.paderborn.krombel.sync.api;
 
 import android.provider.BaseColumns;
 

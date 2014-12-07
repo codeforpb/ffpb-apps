@@ -4,9 +4,7 @@ import android.accounts.*;
 import android.content.*;
 import android.os.*;
 
-import com.j256.ormlite.android.apptools.*;
-
-import net.freifunk.paderborn.krombel.apis.krombel_dash.*;
+import net.freifunk.paderborn.krombel.sync.api.*;
 
 /**
  * SyncAdapter for Krombel Stats

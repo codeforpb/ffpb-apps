@@ -3,10 +3,9 @@ package net.freifunk.paderborn.krombel;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
-import net.freifunk.paderborn.krombel.apis.krombel_dash.*;
+import net.freifunk.paderborn.krombel.sync.api.*;
 
 import org.androidannotations.annotations.*;
-import org.androidannotations.annotations.rest.RestService;
 
 /**
  * Fragment to load and show KrombelStats
