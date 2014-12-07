@@ -3,14 +3,9 @@ package net.freifunk.paderborn.krombel;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
-import net.freifunk.paderborn.krombel.apis.krombel_dash.KrombelDashApi;
-import net.freifunk.paderborn.krombel.apis.krombel_dash.KrombelStat;
+import net.freifunk.paderborn.krombel.apis.krombel_dash.*;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.rest.RestService;
 
 /**
@@ -21,22 +16,22 @@ public class KrombelFragment extends Fragment {
     @ViewById
     TextView textCurrentNodesValue, textMaxNodesValue, textCurrentClientsValue, textMaxClientsValue;
 
-    @RestService
-    KrombelDashApi mKrombelDashApi;
+    @Bean
+    KrombelDownloader mKrombelDownloader;
 
     @AfterViews
     @Background
     void loadStats() {
-        KrombelStat currentNodesStat = mKrombelDashApi.currentNodeCount();
+        KrombelStat currentNodesStat = mKrombelDownloader.getCurrentNodesStat();
         bindValue(currentNodesStat, textCurrentNodesValue);
 
-        KrombelStat currentClientsStat = mKrombelDashApi.currentNodeCount();
+        KrombelStat currentClientsStat = mKrombelDownloader.getCurrentClientsStat();
         bindValue(currentClientsStat, textCurrentClientsValue);
 
-        KrombelStat maxNodesStat = mKrombelDashApi.maximumNodeCount();
+        KrombelStat maxNodesStat = mKrombelDownloader.getMaxNodesStat();
         bindValue(maxNodesStat, textMaxNodesValue);
 
-        KrombelStat maxClientsStat = mKrombelDashApi.maximumClientCount();
+        KrombelStat maxClientsStat = mKrombelDownloader.getMaxClientsStat();
         bindValue(maxClientsStat, textMaxClientsValue);
     }
 
