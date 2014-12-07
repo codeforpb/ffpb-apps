@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.apis.nodesjson;
+package net.freifunk.paderborn.nodes.api;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;

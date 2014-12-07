@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.apis.nodesjson;
+package net.freifunk.paderborn.nodes.api;
 
 import org.androidannotations.annotations.rest.Get;
 import org.androidannotations.annotations.rest.Rest;
