@@ -28,7 +28,6 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
         }
     }
-
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
@@ -40,5 +39,8 @@ android {
 
 
 dependencies {
+    // androidannotations deps need to be here - otherwise code gen does not work
+    apt "org.androidannotations:androidannotations:3.2"
+    compile "org.androidannotations:androidannotations:3.2"
     compile project(':core')
 }
