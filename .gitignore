@@ -16,3 +16,4 @@ gradle.properties
 *.snm
 *.synctex.gz
 *.toc
+app/build/
