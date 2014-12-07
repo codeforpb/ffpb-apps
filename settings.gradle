@@ -1,1 +1,1 @@
-include ':krombel'
+include ':krombel', ':nodes', ':core'
