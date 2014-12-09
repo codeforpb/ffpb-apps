@@ -28,7 +28,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textKrombelHeader"
         android:layout_marginTop="8dp"
-        android:text="Aktuelle Knotenanzahl: "
+        android:text="@string/descrCurrentNodes"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textCurrentNodes"
         android:layout_marginTop="8dp"
-        android:text="Knotenhighscore: "
+        android:text="@string/descrMaxNodes"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textMaxNodes"
         android:layout_marginTop="8dp"
-        android:text="Aktuelle Clientzahl: "
+        android:text="@string/descrCurrentClients"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textCurrentClients"
         android:layout_marginTop="8dp"
-        android:text="Client Highscore: "
+        android:text="@string/descrCurrentClients"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView

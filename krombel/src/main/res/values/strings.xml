@@ -3,4 +3,9 @@
     <string name="accountName">Freifunk Paderborn</string>
     <string name="accountType">net.freifunk.paderborn</string>
     <string name="accountAuthority">net.freifunk.paderborn.krombel</string>
+
+    <string name="descrCurrentNodes">Aktuelle Knotenanzahl: </string>
+    <string name="descrMaxNodes">Knotenhighscore: </string>
+    <string name="descrCurrentClients">Aktuelle Clientzahl: </string>
+    <string name="descrMaxClients">Client Highscore: </string>
 </resources>
