@@ -1,9 +1,9 @@
 package net.freifunk.paderborn.krombel;
 
-import android.support.v4.app.Fragment;
-import android.widget.TextView;
+import android.support.v4.app.*;
 
 import net.freifunk.paderborn.krombel.sync.api.*;
+import net.freifunk.paderborn.krombel.views.*;
 
 import org.androidannotations.annotations.*;
 
@@ -13,7 +13,7 @@ import org.androidannotations.annotations.*;
 @EFragment(R.layout.krombel_stats)
 public class KrombelFragment extends Fragment {
     @ViewById
-    TextView textCurrentNodesValue, textMaxNodesValue, textCurrentClientsValue, textMaxClientsValue;
+    KrombelStatViewGroup vgCurrentNodes, vgMaxNodes, vgCurrentClients, vgMaxClients;
 
     @Bean
     KrombelDownloader mKrombelDownloader;
@@ -22,20 +22,20 @@ public class KrombelFragment extends Fragment {
     @Background
     void loadStats() {
         KrombelStat currentNodesStat = mKrombelDownloader.getCurrentNodesStat();
-        bindValue(currentNodesStat, textCurrentNodesValue);
+        bind(currentNodesStat, vgCurrentNodes);
 
         KrombelStat currentClientsStat = mKrombelDownloader.getCurrentClientsStat();
-        bindValue(currentClientsStat, textCurrentClientsValue);
+        bind(currentClientsStat, vgCurrentClients);
 
         KrombelStat maxNodesStat = mKrombelDownloader.getMaxNodesStat();
-        bindValue(maxNodesStat, textMaxNodesValue);
+        bind(maxNodesStat, vgMaxNodes);
 
         KrombelStat maxClientsStat = mKrombelDownloader.getMaxClientsStat();
-        bindValue(maxClientsStat, textMaxClientsValue);
+        bind(maxClientsStat, vgMaxClients);
     }
 
     @UiThread
-    void bindValue(KrombelStat stat, TextView view) {
-        view.setText("" + stat.getCount());
+    void bind(KrombelStat stat, KrombelStatViewGroup view) {
+        view.bind(stat);
     }
 }
