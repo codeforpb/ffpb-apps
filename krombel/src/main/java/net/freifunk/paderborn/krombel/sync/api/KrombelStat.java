@@ -1,12 +1,12 @@
 package net.freifunk.paderborn.krombel.sync.api;
 
-import android.provider.BaseColumns;
+import android.provider.*;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import com.fasterxml.jackson.databind.annotation.*;
+import com.j256.ormlite.field.*;
+import com.j256.ormlite.table.*;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * A stat from krombel's dashboard
@@ -18,6 +18,7 @@ public class KrombelStat {
     @DatabaseField(columnName = "count", canBeNull = false)
     private int count;
     @DatabaseField(columnName = "timestamp", canBeNull = false, dataType = DataType.DATE_LONG)
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date timestamp;
     @DatabaseField(columnName = "type", canBeNull = false, dataType = DataType.ENUM_STRING)
     private KrombelStatType type;
