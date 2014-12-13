@@ -1,10 +1,13 @@
-<manifest package="net.freifunk.paderborn.krombel"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="net.freifunk.paderborn.krombel"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission
         android:name="android.permission.INTERNET"/>
     <uses-permission
         android:name="android.permission.READ_SYNC_SETTINGS"/>
+
+    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
     <uses-permission
         android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission
@@ -49,8 +52,9 @@
             <intent-filter>
                 <action android:name="android.content.SyncAdapter"/>
             </intent-filter>
-            <meta-data android:name="android.content.SyncAdapter"
-                       android:resource="@xml/syncadapter" />
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter"/>
         </service>
     </application>
 
