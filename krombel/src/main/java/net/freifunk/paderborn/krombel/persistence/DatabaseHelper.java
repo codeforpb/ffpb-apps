@@ -18,9 +18,9 @@ import java.sql.*;
  * Created by ljan on 13.12.14.
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "krombel.db";
-private static final  Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.class);
     private Dao<KrombelStat, Long> statDao;
 
     public DatabaseHelper(Context context) {
@@ -38,14 +38,19 @@ private static final  Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.cla
 
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-
+        try {
+            TableUtils.dropTable(connectionSource, KrombelStat.class, true);
+            onCreate(database, connectionSource);
+        } catch (SQLException e) {
+            LOGGER.error("Could not upgrade db from {} to {}", oldVersion, newVersion);
+        }
     }
 
     public Dao<KrombelStat, Long> getStatDao() throws SQLException {
         if (statDao == null) {
             statDao = getDao(KrombelStat.class);
         }
-        return  statDao;
+        return statDao;
     }
 
 }

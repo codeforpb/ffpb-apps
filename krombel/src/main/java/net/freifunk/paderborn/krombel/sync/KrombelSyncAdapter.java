@@ -62,11 +62,8 @@ public class KrombelSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private void persist(KrombelStat stat) throws SQLException {
-        KrombelStat existing = getStatDao().queryBuilder().where().eq(KrombelStat.TIMESTAMP, stat.getTimestamp()).queryForFirst();
-        if (existing != null) {
-            getStatDao().create(stat);
-            LOGGER.info("Created {}", stat);
-        }
+        getStatDao().create(stat);
+        LOGGER.info("Created {}", stat);
     }
 
 }
