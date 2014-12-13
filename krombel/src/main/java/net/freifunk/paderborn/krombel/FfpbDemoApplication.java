@@ -2,6 +2,7 @@ package net.freifunk.paderborn.krombel;
 
 import android.accounts.*;
 import android.app.*;
+import android.content.*;
 import android.os.*;
 
 import org.androidannotations.annotations.*;
@@ -37,6 +38,11 @@ public class FfpbDemoApplication extends Application {
             LOGGER.info("Could not add account {}.", account);
         }
 
-        getContentResolver().addPeriodicSync(account,accountAuthority,Bundle.EMPTY,SYNC_INTERVAL);
+        getContentResolver().addPeriodicSync(account, accountAuthority, Bundle.EMPTY, SYNC_INTERVAL);
+
+        Bundle forceBundle = new Bundle();
+        forceBundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        getContentResolver().requestSync(account, accountAuthority, forceBundle);
+        LOGGER.debug("Setup synchronization and forced sync.");
     }
 }
