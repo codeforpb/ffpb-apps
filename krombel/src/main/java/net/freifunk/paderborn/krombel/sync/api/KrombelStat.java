@@ -13,14 +13,16 @@ import java.util.*;
  */
 @DatabaseTable
 public class KrombelStat {
+    public static final String TIMESTAMP = "timestamp";
+    public static final String TYPE = "type";
     @DatabaseField(generatedId = true, columnName = BaseColumns._ID, canBeNull = false)
     private long _id;
     @DatabaseField(columnName = "count", canBeNull = false)
     private int count;
-    @DatabaseField(columnName = "timestamp", canBeNull = false, dataType = DataType.DATE_LONG)
+    @DatabaseField(columnName = TIMESTAMP, canBeNull = false, dataType = DataType.DATE_LONG)
     @JsonDeserialize(using = DateDeserializer.class)
     private Date timestamp;
-    @DatabaseField(columnName = "type", canBeNull = false, dataType = DataType.ENUM_STRING)
+    @DatabaseField(columnName = TYPE, canBeNull = false, dataType = DataType.ENUM_STRING)
     private KrombelStatType type;
 
     public KrombelStat() {
@@ -63,5 +65,15 @@ public class KrombelStat {
 
     public void setType(KrombelStatType type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "KrombelStat{" +
+                "_id=" + _id +
+                ", count=" + count +
+                ", timestamp=" + timestamp +
+                ", type=" + type +
+                '}';
     }
 }
