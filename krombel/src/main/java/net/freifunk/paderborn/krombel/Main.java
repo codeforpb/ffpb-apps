@@ -36,6 +36,12 @@ public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefr
         registerSyncObserver();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestSync();
+    }
+
     void registerSyncObserver() {
         int mask = ContentResolver.SYNC_OBSERVER_TYPE_ACTIVE | ContentResolver.SYNC_OBSERVER_TYPE_PENDING;
         final ContentResolver contentResolver = getContentResolver();
@@ -56,6 +62,10 @@ public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefr
 
     @Override
     public void onRefresh() {
+        requestSync();
+    }
+
+    private void requestSync() {
         Bundle bundle = new Bundle();
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
