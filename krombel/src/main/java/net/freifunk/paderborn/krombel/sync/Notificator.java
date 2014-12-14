@@ -10,6 +10,7 @@ import net.freifunk.paderborn.krombel.*;
 import net.freifunk.paderborn.krombel.sync.api.*;
 
 import org.androidannotations.annotations.*;
+import org.androidannotations.annotations.res.*;
 import org.slf4j.*;
 
 import java.util.*;
@@ -24,6 +25,8 @@ public class Notificator {
     Logger LOGGER = LoggerFactory.getLogger(Notificator.class);
     @RootContext
     Context context;
+    @StringRes
+    String notificationStatLine, notificationTitle;
     private int mId = 0;
 
     public void notificate(List<KrombelStat> newRecords) {
@@ -43,31 +46,34 @@ public class Notificator {
         LOGGER.debug("Built stack.");
         if (newRecords.size() == 1) {
             LOGGER.debug("Building simple notification.");
-            KrombelStat stat = newRecords.get(0);
-            String text = stat.getType() + ": " + stat.getCount();
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.ic_launcher)
-                            .setContentTitle("Neuer ffpb Highscore")
-                            .setContentText(text);
+                            .setContentTitle(notificationTitle)
+                            .setContentText(statToText(newRecords.get(0)));
 
             mBuilder.setContentIntent(resultPendingIntent);
             mNotificationManager.notify(mId, mBuilder.build());
         } else {
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.drawable.ic_launcher)
-                    .setContentTitle("Neue ffpb Highscores")
-                    .setContentText("contextText");
+                    .setContentTitle(notificationTitle)
+                    .setContentText("");
             NotificationCompat.InboxStyle inboxStyle =
                     new NotificationCompat.InboxStyle();
-            inboxStyle.setBigContentTitle("Neue Highscores:");
+            inboxStyle.setBigContentTitle(notificationTitle);
             for (KrombelStat stat : newRecords) {
-                String line = stat.getType() + ": " + stat.getCount();
+                String line = statToText(stat);
                 inboxStyle.addLine(line);
             }
             mBuilder.setStyle(inboxStyle);
             mBuilder.setContentIntent(resultPendingIntent);
             mNotificationManager.notify(mId, mBuilder.build());
         }
+    }
+
+    private String statToText(KrombelStat stat) {
+        String type = context.getString(stat.getType().stringResId);
+        return String.format(notificationStatLine, type, stat.getCount());
     }
 }
