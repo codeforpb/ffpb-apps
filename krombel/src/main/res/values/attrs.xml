@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KrombelStatViewGroup">
+        <attr name="type" format="enum">
+            <enum name="clients" value="0"/>
+            <enum name="nodes" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

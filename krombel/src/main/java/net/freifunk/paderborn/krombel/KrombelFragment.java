@@ -87,12 +87,4 @@ public class KrombelFragment extends Fragment {
         return databaseHelper;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
-    }
 }

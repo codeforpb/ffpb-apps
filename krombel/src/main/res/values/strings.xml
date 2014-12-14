@@ -10,5 +10,5 @@
     <string name="descrMaxClients">Client Highscore: </string>
     <string name="notificationStatLine" formatted="false">%s %d um %s</string>
     <string name="notificationTitle">Neuer ffpb Highscore</string>
-    <string name="titleKrombelStats">Krombel Stats</string>
+    <string name="titleKrombelStats">Krombels Dashboard</string>
 </resources>

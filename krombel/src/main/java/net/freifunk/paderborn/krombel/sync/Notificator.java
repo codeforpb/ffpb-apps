@@ -73,6 +73,9 @@ public class Notificator {
     }
 
     private String statToText(KrombelStat stat) {
+        if (stat.getCount() == -1) {
+            return "";
+        }
         String type = context.getString(stat.getType().stringResId);
         return String.format(notificationStatLine, type, stat.getCount());
     }
