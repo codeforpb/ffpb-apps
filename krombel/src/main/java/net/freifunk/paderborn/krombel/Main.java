@@ -8,6 +8,7 @@ import android.support.v7.app.*;
 import net.freifunk.paderborn.krombel.sync.*;
 
 import org.androidannotations.annotations.*;
+import org.androidannotations.annotations.res.*;
 import org.slf4j.*;
 
 /**
@@ -22,9 +23,13 @@ public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefr
     @ViewById
     SwipeRefreshLayout refreshLayout;
 
+    @StringRes
+    String titleKrombelStats;
+
     @AfterViews
     void afterViews() {
         refreshLayout.setOnRefreshListener(this);
+        setTitle(titleKrombelStats);
         registerSyncObserver();
     }
 

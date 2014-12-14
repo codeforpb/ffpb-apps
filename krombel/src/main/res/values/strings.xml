@@ -8,4 +8,5 @@
     <string name="descrMaxNodes">Knotenhighscore: </string>
     <string name="descrCurrentClients">Aktuelle Clientzahl: </string>
     <string name="descrMaxClients">Client Highscore: </string>
+    <string name="titleKrombelStats">Krombel Stats</string>
 </resources>
