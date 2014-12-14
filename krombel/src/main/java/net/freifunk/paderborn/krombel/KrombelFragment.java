@@ -13,6 +13,7 @@ import net.freifunk.paderborn.krombel.views.*;
 import org.androidannotations.annotations.*;
 
 import java.sql.*;
+import java.util.*;
 
 /**
  * Fragment to load and show KrombelStats
@@ -27,30 +28,6 @@ public class KrombelFragment extends Fragment {
 
     private DatabaseHelper databaseHelper = null;
     private Dao<KrombelStat, Long> statDao;
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
-    }
-
-    private DatabaseHelper getHelper() {
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(getActivity(),
-                    DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }
-
-    private Dao<KrombelStat, Long> getStatDao() throws SQLException {
-        if (statDao == null) {
-            statDao = getHelper().getStatDao();
-        }
-        return statDao;
-    }
 
     @AfterViews
     @Background
@@ -85,11 +62,37 @@ public class KrombelFragment extends Fragment {
     @Click
     void btnClearDBClicked() {
         try {
-            getStatDao().delete(getStatDao().queryForAll());
+            List<KrombelStat> datas = getStatDao().queryForAll();
+            int delete = getStatDao().delete(datas);
+            Toast.makeText(getActivity(), "Cleared " + delete + " entries", Toast.LENGTH_LONG).show();
             loadStats();
         } catch (SQLException e) {
             // fixme string res
             Toast.makeText(getActivity(), "DB could not be cleared", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private Dao<KrombelStat, Long> getStatDao() throws SQLException {
+        if (statDao == null) {
+            statDao = getHelper().getStatDao();
+        }
+        return statDao;
+    }
+
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(getActivity(),
+                    DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
         }
     }
 }

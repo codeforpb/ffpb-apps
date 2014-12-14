@@ -26,6 +26,9 @@ public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefr
     @StringRes
     String titleKrombelStats;
 
+    @FragmentById
+    KrombelFragment fragmentDash;
+
     @AfterViews
     void afterViews() {
         refreshLayout.setOnRefreshListener(this);
@@ -48,6 +51,7 @@ public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefr
     @UiThread
     void updateUi(boolean syncActive) {
         refreshLayout.setRefreshing(syncActive);
+        fragmentDash.loadStats();
     }
 
     @Override
