@@ -15,9 +15,10 @@ import java.util.*;
 public class KrombelStat {
     public static final String TIMESTAMP = "timestamp";
     public static final String TYPE = "type";
+    public static final String COUNT = "count";
     @DatabaseField(generatedId = true, columnName = BaseColumns._ID, canBeNull = false)
     private long _id;
-    @DatabaseField(columnName = "count", canBeNull = false)
+    @DatabaseField(columnName = COUNT, canBeNull = false)
     private int count;
     @DatabaseField(columnName = TIMESTAMP, canBeNull = false, dataType = DataType.DATE_LONG)
     @JsonDeserialize(using = DateDeserializer.class)

@@ -13,6 +13,7 @@ import net.freifunk.paderborn.krombel.sync.api.*;
 import org.slf4j.*;
 
 import java.sql.*;
+import java.util.*;
 
 /**
  * SyncAdapter for Krombel Stats
@@ -22,6 +23,8 @@ public class KrombelSyncAdapter extends AbstractThreadedSyncAdapter {
     KrombelDownloader mDownloader;
     private DatabaseHelper databaseHelper;
     private Dao<KrombelStat, Long> statDao;
+    private Notificator mNotificator;
+
 
     public KrombelSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -37,7 +40,7 @@ public class KrombelSyncAdapter extends AbstractThreadedSyncAdapter {
         mDownloader = KrombelDownloader_.getInstance_(context);
         databaseHelper = OpenHelperManager.getHelper(context,
                 DatabaseHelper.class);
-
+        mNotificator = Notificator_.getInstance_(context);
     }
 
     private Dao<KrombelStat, Long> getStatDao() throws SQLException {
@@ -51,9 +54,22 @@ public class KrombelSyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         try {
             LOGGER.debug("Starting sync");
+            List<KrombelStat> newRecords = new ArrayList<>(4);
             for (KrombelStatType type : KrombelStatType.values()) {
-                persist(mDownloader.download(type));
+                KrombelStat downloaded = mDownloader.download(type);
+                KrombelStat currentMax = getCurrentMax(type);
+                LOGGER.debug("Current highscore: {}", currentMax);
+                if (downloaded.getCount() > currentMax.getCount()) {
+                    LOGGER.debug("New highscore");
+                    newRecords.add(downloaded);
+                    LOGGER.debug("Added to new highscore list");
+                    getStatDao().create(downloaded);
+                    LOGGER.info("Persisted {}", downloaded);
+                }
+                LOGGER.trace("Downloading next.");
             }
+            LOGGER.debug("Downloads finished.");
+            mNotificator.notificate(newRecords);
         } catch (SQLException e) {
             LOGGER.error("Could not sync because of SQLException", e);
         } finally {
@@ -61,9 +77,16 @@ public class KrombelSyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    private void persist(KrombelStat stat) throws SQLException {
-        getStatDao().create(stat);
-        LOGGER.info("Created {}", stat);
+    private KrombelStat getCurrentMax(KrombelStatType type) throws SQLException {
+        KrombelStat krombelStat = getStatDao().queryBuilder()
+                .orderBy(KrombelStat.COUNT, false)
+                .where().eq(KrombelStat.TYPE, type)
+                .queryForFirst();
+        if (krombelStat == null) {
+            krombelStat = new KrombelStat();
+            krombelStat.setCount(-1);
+        }
+        return krombelStat;
     }
 
 }
