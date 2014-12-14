@@ -81,4 +81,15 @@ public class KrombelFragment extends Fragment {
     void bind(KrombelStat stat, KrombelStatViewGroup view) {
         view.bind(stat);
     }
+
+    @Click
+    void btnClearDBClicked() {
+        try {
+            getStatDao().delete(getStatDao().queryForAll());
+            loadStats();
+        } catch (SQLException e) {
+            // fixme string res
+            Toast.makeText(getActivity(), "DB could not be cleared", Toast.LENGTH_LONG).show();
+        }
+    }
 }
