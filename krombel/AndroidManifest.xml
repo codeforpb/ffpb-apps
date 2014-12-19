@@ -14,7 +14,7 @@
         android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
-        android:name=".FfpbDemoApplication_"
+        android:name="net.freifunk.paderborn.krombel.FfpbDemoApplication_"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -25,14 +25,18 @@
             android:name="net.freifunk.paderborn.krombel.Main_"
             android:label="@string/app_name"
             >
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".About_"
+            android:label="@string/about"></activity>
+
         <service
-            android:name=".sync.KrombelAuthenticatorService_">
+            android:name="net.freifunk.paderborn.krombel.sync.KrombelAuthenticatorService_">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>
@@ -41,13 +45,13 @@
                 android:resource="@xml/authenticator"/>
         </service>
         <provider
-            android:name=".sync.StubContentProvider_"
+            android:name="net.freifunk.paderborn.krombel.sync.StubContentProvider_"
             android:authorities="@string/accountAuthority"
             android:exported="false"
             android:syncable="true"/>
 
         <service
-            android:name=".sync.KrombelSyncService_"
+            android:name="net.freifunk.paderborn.krombel.sync.KrombelSyncService_"
             android:exported="true"
             android:process=":sync">
             <intent-filter>

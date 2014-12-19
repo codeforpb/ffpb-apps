@@ -1,8 +1,7 @@
 package net.freifunk.paderborn.krombel.sync.api;
 
-import org.androidannotations.annotations.rest.Get;
-import org.androidannotations.annotations.rest.Rest;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.androidannotations.annotations.rest.*;
+import org.springframework.http.converter.json.*;
 
 /**
  * API to get some data from Krombel's dashboard

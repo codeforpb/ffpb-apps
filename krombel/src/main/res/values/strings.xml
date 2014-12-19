@@ -4,11 +4,16 @@
     <string name="accountType">net.freifunk.paderborn</string>
     <string name="accountAuthority">net.freifunk.paderborn.krombel</string>
 
+    <string name="titleKrombelStats">@string/app_name</string>
     <string name="descrCurrentNodes">Aktuelle Knotenanzahl: </string>
     <string name="descrMaxNodes">Knotenhighscore: </string>
     <string name="descrCurrentClients">Aktuelle Clientzahl: </string>
     <string name="descrMaxClients">Client Highscore: </string>
+    <string name="ffpbLong">Freifunk Paderborn</string>
+    <string name="githubLink">&lt;a href=\"https://github.com/codeforpb/ffpb-apps\">github&lt;/a></string>
+    <string name="ffpbUrl">&lt;a href=\"http://paderborn.freifunk.net/\">Freifunk Paderborn&lt;/a></string>
+    <string name="about">Über die App</string>
     <string name="notificationStatLine" formatted="false">%s %d</string>
     <string name="notificationTitle">Neuer ffpb Highscore</string>
-    <string name="titleKrombelStats">Krombels Dashboard</string>
+    <string name="aboutText">Inspiriert von &lt;a href="http://dashing.krombel.de/stats">Krombels Dashboard&lt;/a> bringt diese App ein minimalistisches Dashboard auf Android.</string>
 </resources>

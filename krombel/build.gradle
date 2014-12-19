@@ -1,6 +1,6 @@
 def versionMajor = 0 // incompatible API changes
-def versionMinor = 2 // added functionality in a backwards-compatible manner
-def versionPatch = 2 // backwards-compatible bug fixes
+def versionMinor = 3 // added functionality in a backwards-compatible manner
+def versionPatch = 0 // backwards-compatible bug fixes
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 apply plugin: 'com.android.application'
@@ -32,7 +32,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.krombel
+            resValue "string", "versionCode", "${versionMajor}.${versionMinor}.${versionPatch}"
+        }
+        debug {
+            resValue "string", "versionCode", "${versionMajor}.${versionMinor}.${versionPatch}"
         }
     }
     sourceSets {

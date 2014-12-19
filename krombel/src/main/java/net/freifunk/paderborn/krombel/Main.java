@@ -15,6 +15,7 @@ import org.slf4j.*;
  * Created by ljan on 30.11.14.
  */
 @EActivity(R.layout.activity_main)
+@OptionsMenu(R.menu.menu)
 public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefreshListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     @Bean
@@ -71,5 +72,10 @@ public class Main extends ActionBarActivity implements SwipeRefreshLayout.OnRefr
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         ContentResolver.requestSync(mAccountCreator.getAccount(), mAccountCreator.getAuthority(), bundle);
         LOGGER.debug("Requested sync");
+    }
+
+    @OptionsItem(R.id.actionAbout)
+    void openAbout() {
+        About_.intent(this).start();
     }
 }
