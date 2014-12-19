@@ -9,7 +9,7 @@
         android:id="@+id/vgCurrentNodes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
+        />
 
     <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
         android:id="@+id/vgMaxNodes"

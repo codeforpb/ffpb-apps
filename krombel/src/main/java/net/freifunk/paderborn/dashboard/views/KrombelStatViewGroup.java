@@ -1,7 +1,6 @@
 package net.freifunk.paderborn.dashboard.views;
 
 import android.content.*;
-import android.content.res.*;
 import android.util.*;
 import android.widget.*;
 
@@ -20,31 +19,9 @@ public class KrombelStatViewGroup extends RelativeLayout implements CustomDataVi
     private final DateFormat sdf = SimpleDateFormat.getDateTimeInstance();
     @ViewById
     TextView textStatName, textStatValue, textStatDate;
-    @ViewById
-    RelativeLayout content;
-    private int mType = 0;
 
     public KrombelStatViewGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.KrombelStatViewGroup,
-                0, 0);
-
-        try {
-            mType = a.getInt(R.styleable.KrombelStatViewGroup_type, 0);
-        } finally {
-            a.recycle();
-        }
-    }
-
-    @AfterViews
-    void changeBackground() {
-        if (mType == 0) {
-            content.setBackgroundColor(getResources().getColor(R.color.backgroundClients));
-        } else {
-            content.setBackgroundColor(getResources().getColor(R.color.backgroundNodes));
-        }
     }
 
     public void bind(KrombelStat stat) {
