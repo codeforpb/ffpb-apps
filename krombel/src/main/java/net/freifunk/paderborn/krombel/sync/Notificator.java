@@ -29,48 +29,62 @@ public class Notificator {
     String notificationStatLine, notificationTitle;
     private int mId = 0;
 
+    /**
+     * @param newRecords
+     */
     public void notificate(List<KrombelStat> newRecords) {
         if (newRecords.size() == 0) {
             return;
         }
+
         LOGGER.debug("Building notification about new highscores");
 
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addNextIntent(Main_.intent(context).get());
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
+        PendingIntent resultPendingIntent = buildStack();
 
         LOGGER.debug("Built stack.");
-        if (newRecords.size() == 1) {
-            LOGGER.debug("Building simple notification.");
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_launcher)
-                            .setContentTitle(notificationTitle)
-                            .setContentText(statToText(newRecords.get(0)));
 
-            mBuilder.setContentIntent(resultPendingIntent);
-            mNotificationManager.notify(mId, mBuilder.build());
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle(notificationTitle);
+
+        if (newRecords.size() == 1) {
+            mBuilder = buildSimpleNotification(newRecords, mBuilder);
         } else {
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setContentTitle(notificationTitle)
-                    .setContentText("");
-            NotificationCompat.InboxStyle inboxStyle =
-                    new NotificationCompat.InboxStyle();
-            inboxStyle.setBigContentTitle(notificationTitle);
-            for (KrombelStat stat : newRecords) {
-                String line = statToText(stat);
-                inboxStyle.addLine(line);
-            }
-            mBuilder.setStyle(inboxStyle);
-            mBuilder.setContentIntent(resultPendingIntent);
-            mNotificationManager.notify(mId, mBuilder.build());
+            mBuilder = buildInboxNotification(newRecords, mBuilder);
         }
+
+        mBuilder.setContentIntent(resultPendingIntent);
+        mNotificationManager.notify(mId, mBuilder.build());
     }
+
+    private NotificationCompat.Builder buildInboxNotification(List<KrombelStat> newRecords, NotificationCompat.Builder mBuilder) {
+        mBuilder = mBuilder.setContentText("Neue Highscores!");
+        NotificationCompat.InboxStyle inboxStyle =
+                new NotificationCompat.InboxStyle();
+        inboxStyle.setBigContentTitle(notificationTitle);
+        for (KrombelStat stat : newRecords) {
+            String line = statToText(stat);
+            inboxStyle.addLine(line);
+        }
+        mBuilder.setStyle(inboxStyle);
+        return mBuilder;
+    }
+
+    private NotificationCompat.Builder buildSimpleNotification(List<KrombelStat> newRecords, NotificationCompat.Builder mBuilder) {
+        LOGGER.debug("Building simple notification.");
+        mBuilder = mBuilder.setContentText(statToText(newRecords.get(0)));
+        return mBuilder;
+    }
+
+    private PendingIntent buildStack() {
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntent(Main_.intent(context).get());
+        return stackBuilder.getPendingIntent(
+                0,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+    }
+
 
     private String statToText(KrombelStat stat) {
         if (stat.getCount() == -1) {

@@ -56,25 +56,48 @@ public class KrombelSyncAdapter extends AbstractThreadedSyncAdapter {
             LOGGER.debug("Starting sync");
             List<KrombelStat> newRecords = new ArrayList<>(4);
             for (KrombelStatType type : KrombelStatType.values()) {
-                KrombelStat downloaded = mDownloader.download(type);
+                KrombelStat downloaded = downloadAndPersist(type);
                 KrombelStat currentMax = getCurrentMax(type);
-                LOGGER.debug("Current highscore: {}", currentMax);
-                if (downloaded.getCount() > currentMax.getCount()) {
-                    LOGGER.debug("New highscore");
+
+                if (isNotificationWorthy(downloaded, currentMax)) {
                     newRecords.add(downloaded);
                     LOGGER.debug("Added to new highscore list");
-                    getStatDao().create(downloaded);
-                    LOGGER.info("Persisted {}", downloaded);
                 }
-                LOGGER.trace("Downloading next.");
             }
             LOGGER.debug("Downloads finished.");
-            mNotificator.notificate(newRecords);
+            mNotificator.notificate(removeCurrentStats(newRecords));
         } catch (SQLException e) {
             LOGGER.error("Could not sync because of SQLException", e);
         } finally {
             LOGGER.debug("Finished sync");
         }
+    }
+
+    private KrombelStat downloadAndPersist(KrombelStatType type) throws SQLException {
+        KrombelStat downloaded = mDownloader.download(type);
+        getStatDao().create(downloaded);
+        LOGGER.info("Persisted {}", downloaded);
+        return downloaded;
+    }
+
+    private boolean isNotificationWorthy(KrombelStat downloaded, KrombelStat currentMax) throws SQLException {
+        boolean isMaxStat = KrombelStatType.MAX_NODES == downloaded.getType()
+                || KrombelStatType.MAX_CLIENTS == downloaded.getType();
+        boolean newRecord = downloaded.getCount() > currentMax.getCount();
+
+        return isMaxStat && newRecord;
+    }
+
+    private List<KrombelStat> removeCurrentStats(List<KrombelStat> newRecords) {
+        List<KrombelStat> cleaned = new ArrayList<>(newRecords.size());
+        for (KrombelStat stat : newRecords) {
+            boolean isMaxStat = KrombelStatType.MAX_NODES == stat.getType()
+                    || KrombelStatType.MAX_CLIENTS == stat.getType();
+            if (isMaxStat) {
+                cleaned.add(stat);
+            }
+        }
+        return cleaned;
     }
 
     private KrombelStat getCurrentMax(KrombelStatType type) throws SQLException {
