@@ -1,7 +1,7 @@
-package net.freifunk.paderborn.krombel;
+package net.freifunk.paderborn.dashboard;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import android.app.*;
+import android.test.*;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>

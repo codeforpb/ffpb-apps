@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.persistence;
+package net.freifunk.paderborn.dashboard.persistence;
 
 import android.content.*;
 import android.database.sqlite.*;
@@ -8,7 +8,7 @@ import com.j256.ormlite.dao.*;
 import com.j256.ormlite.support.*;
 import com.j256.ormlite.table.*;
 
-import net.freifunk.paderborn.krombel.sync.api.*;
+import net.freifunk.paderborn.dashboard.sync.api.*;
 
 import org.slf4j.*;
 

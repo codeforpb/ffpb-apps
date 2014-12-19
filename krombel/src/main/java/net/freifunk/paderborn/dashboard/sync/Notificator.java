@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.sync;
+package net.freifunk.paderborn.dashboard.sync;
 
 
 import android.app.*;
@@ -6,8 +6,8 @@ import android.content.*;
 import android.support.v4.app.*;
 import android.support.v4.app.TaskStackBuilder;
 
-import net.freifunk.paderborn.krombel.*;
-import net.freifunk.paderborn.krombel.sync.api.*;
+import net.freifunk.paderborn.dashboard.*;
+import net.freifunk.paderborn.dashboard.sync.api.*;
 
 import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.res.*;

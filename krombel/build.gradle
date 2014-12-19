@@ -7,18 +7,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
-    signingConfigs {
-        krombel {
-            keyAlias 'ffpb-krombel'
-            keyPassword 'yn76TuH98XXViViKeMmU'
-            storeFile file('/home/ljan/.signing/ffpb-krombel.jks')
-            storePassword 'yn76TuH98XXViViKeMmU'
-        }
-    }
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
     defaultConfig {
-        applicationId "net.freifunk.paderborn.krombel"
+        applicationId "net.freifunk.paderborn.dashboard"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild

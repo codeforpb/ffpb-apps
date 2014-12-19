@@ -8,14 +8,14 @@
                 android:paddingRight="16dp"
                 android:paddingTop="16dp">
 
-    <net.freifunk.paderborn.krombel.views.KrombelStatViewGroup_
+    <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
         android:id="@+id/vgCurrentNodes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:type="nodes"
         />
 
-    <net.freifunk.paderborn.krombel.views.KrombelStatViewGroup_
+    <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
         android:id="@+id/vgMaxNodes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         custom:type="nodes"
         />
 
-    <net.freifunk.paderborn.krombel.views.KrombelStatViewGroup_
+    <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
         android:id="@+id/vgCurrentClients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         custom:type="clients"
         />
 
-    <net.freifunk.paderborn.krombel.views.KrombelStatViewGroup_
+    <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
         android:id="@+id/vgMaxClients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

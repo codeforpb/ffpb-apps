@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel;
+package net.freifunk.paderborn.dashboard;
 
 import android.support.v7.app.*;
 import android.text.method.*;

@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.sync;
+package net.freifunk.paderborn.dashboard.sync;
 
 import android.app.*;
 import android.content.*;

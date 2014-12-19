@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.sync;
+package net.freifunk.paderborn.dashboard.sync;
 
 import android.app.*;
 import android.content.*;
@@ -9,10 +9,10 @@ import org.androidannotations.annotations.*;
 /**
  * KrombelSyncService
  * todo further doc?
- * FIXME add krombel account
+ * FIXME add dashboard account
  */
 @EService
-public class KrombelSyncService extends Service{
+public class KrombelSyncService extends Service {
     private static final Object sSyncAdapterLock = new Object();
     private static KrombelSyncAdapter sAdapter;
 

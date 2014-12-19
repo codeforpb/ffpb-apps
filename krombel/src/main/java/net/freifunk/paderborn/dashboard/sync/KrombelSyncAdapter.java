@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.krombel.sync;
+package net.freifunk.paderborn.dashboard.sync;
 
 import android.accounts.*;
 import android.content.*;
@@ -7,8 +7,8 @@ import android.os.*;
 import com.j256.ormlite.android.apptools.*;
 import com.j256.ormlite.dao.*;
 
-import net.freifunk.paderborn.krombel.persistence.*;
-import net.freifunk.paderborn.krombel.sync.api.*;
+import net.freifunk.paderborn.dashboard.persistence.*;
+import net.freifunk.paderborn.dashboard.sync.api.*;
 
 import org.slf4j.*;
 

@@ -1,11 +1,11 @@
-package net.freifunk.paderborn.krombel;
+package net.freifunk.paderborn.dashboard;
 
 import android.content.*;
 import android.os.*;
 import android.support.v4.widget.*;
 import android.support.v7.app.*;
 
-import net.freifunk.paderborn.krombel.sync.*;
+import net.freifunk.paderborn.dashboard.sync.*;
 
 import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.res.*;
