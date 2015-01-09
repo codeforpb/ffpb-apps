@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Dashboard</string>
-    <string name="accountName">Freifunk Paderborn</string>
-    <string name="accountType">net.freifunk.paderborn</string>
-    <string name="accountAuthority">net.freifunk.paderborn.krombel</string>
+    <string name="accountName">Freifunk Paderborn: Dashboard</string>
+    <string name="accountType">net.freifunk.paderborn.dashboard</string>
 
     <string name="titleKrombelStats">@string/app_name</string>
     <string name="descrCurrentNodes">Aktuelle Knotenanzahl: </string>

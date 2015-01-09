@@ -35,6 +35,16 @@ android {
         exclude 'META-INF/license.txt'
         exclude 'LICENSE.txt'
     }
+
+    if (project.hasProperty("nodes.signing")) {
+        println "project has property nodes.signing:"
+        println project.property("nodes.signing")
+        if (new File(project.property("nodes.signing") + ".gradle").exists()) {
+            apply from: project.property("nodes.signing") + ".gradle";
+            println "Applied properties"
+        }
+    }
+
 }
 
 

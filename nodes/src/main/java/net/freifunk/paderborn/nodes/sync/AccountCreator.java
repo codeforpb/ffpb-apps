@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.dashboard.sync;
+package net.freifunk.paderborn.nodes.sync;
 
 import android.accounts.*;
 

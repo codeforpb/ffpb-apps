@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Nodes</string>
+    <string name="accountType">net.freifunk.paderborn.nodes</string>
+    <string name="accountName">Freifunk Paderborn: Knoten</string>
 </resources>
