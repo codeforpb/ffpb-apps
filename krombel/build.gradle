@@ -42,6 +42,15 @@ android {
         exclude 'META-INF/license.txt'
         exclude 'LICENSE.txt'
     }
+
+    if (project.hasProperty("krombel.signing")) {
+        println "project has property krombel.signing:"
+        println project.property("krombel.signing")
+        if (new File(project.property("krombel.signing") + ".gradle").exists()) {
+            apply from: project.property("krombel.signing") + ".gradle";
+            println "Applied properties"
+        }
+    }
 }
 
 
