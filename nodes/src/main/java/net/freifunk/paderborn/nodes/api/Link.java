@@ -1,16 +1,18 @@
 package net.freifunk.paderborn.nodes.api;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.noveogroup.android.log.Logger;
-import com.noveogroup.android.log.LoggerManager;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.*;
+import com.j256.ormlite.logger.*;
 
 /**
  * Class to represent Links.
  */
 public class Link {
-    public static final Logger LOGGER = LoggerManager.getLogger();
+    public static final Logger LOGGER = LoggerFactory.getLogger(Link.class);
     String id, client, quality;
     int target, source;
+    @JsonDeserialize(using = LinkTypeDeserializer.class)
+    LinkType type;
 
     public Link() {
 
@@ -56,8 +58,28 @@ public class Link {
         this.source = source;
     }
 
+    public LinkType getType() {
+        return type;
+    }
+
+    public void setType(LinkType type) {
+        this.type = type;
+    }
+
     @JsonAnySetter
     public void setAny(String key, Object o) {
-        LOGGER.w("Got Json: {} -> {}", key, o);
+        LOGGER.warn("Got Json: {} -> {}", key, o);
+    }
+
+    @Override
+    public String toString() {
+        return "Link{" +
+                "id='" + id + '\'' +
+                ", client='" + client + '\'' +
+                ", quality='" + quality + '\'' +
+                ", target=" + target +
+                ", source=" + source +
+                ", type=" + type +
+                '}';
     }
 }

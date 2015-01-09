@@ -1,11 +1,9 @@
 package net.freifunk.paderborn.nodes.api;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.noveogroup.android.log.Logger;
-import com.noveogroup.android.log.LoggerManager;
+import com.fasterxml.jackson.annotation.*;
+import com.noveogroup.android.log.*;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * Class to represent json-API metainformation
@@ -30,5 +28,12 @@ public class MetaInformation {
     @JsonAnySetter
     public void setAny(String key, Object o) {
         LOGGER.w("Got Json: {} -> {}", key, o);
+    }
+
+    @Override
+    public String toString() {
+        return "MetaInformation{" +
+                "timestamp=" + timestamp +
+                '}';
     }
 }
