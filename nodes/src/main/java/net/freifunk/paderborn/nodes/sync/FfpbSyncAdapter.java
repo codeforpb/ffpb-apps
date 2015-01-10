@@ -25,6 +25,7 @@ public class FfpbSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         LOGGER.warn("Stub!");
+
     }
 
 }
