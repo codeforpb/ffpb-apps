@@ -1,28 +1,46 @@
 package net.freifunk.paderborn.nodes.api;
 
+import android.provider.*;
+
 import com.fasterxml.jackson.annotation.*;
+import com.j256.ormlite.field.*;
+import com.j256.ormlite.table.*;
 import com.noveogroup.android.log.*;
 
 /**
  * Class to represent nodes.
  */
+@DatabaseTable(tableName = Node.NODES)
 public class Node {
 
     public static final Logger LOGGER = LoggerManager.getLogger();
+    public static final String NODES = "nodes";
     private static final int GEO_LAT_INDEX = 0,
             GEO_LON_INDEX = 1;
-
-    String firmware;
+    @DatabaseField(generatedId = true, columnName = BaseColumns._ID)
+    long _id;
+    @DatabaseField(unique = true)
+    String remoteId;
+    @DatabaseField
     String name;
-    String id;
+    @DatabaseField
+    String firmware;
+    @DatabaseField
     String macs;
+    @DatabaseField
     int clientcount = 0;
+    @DatabaseField
     boolean legacy = false;
+    @DatabaseField
     boolean gateway = false;
+    @DatabaseField
     boolean client = false;
+    @DatabaseField
     boolean online = false;
-
-    double lat, lon;
+    @DatabaseField(generatedId = true)
+    double lat;
+    @DatabaseField(generatedId = true)
+    double lon;
 
     public Node() {
     }
@@ -77,12 +95,12 @@ public class Node {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public String getRemoteId() {
+        return remoteId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRemoteId(String remoteId) {
+        this.remoteId = remoteId;
     }
 
     public String getMacs() {
