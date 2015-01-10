@@ -2,15 +2,31 @@ package net.freifunk.paderborn.nodes.api;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.*;
+import com.j256.ormlite.field.*;
 import com.j256.ormlite.logger.*;
+import com.j256.ormlite.table.*;
 
 /**
  * Class to represent Links.
  */
+@DatabaseTable(tableName = "links")
 public class Link {
     public static final Logger LOGGER = LoggerFactory.getLogger(Link.class);
-    String id, client, quality;
-    int target, source;
+
+    @DatabaseField(generatedId = true)
+    long _id;
+    @DatabaseField(generatedId = true)
+    String remoteId;
+    @DatabaseField(generatedId = true)
+    String client;
+    @DatabaseField(generatedId = true)
+    String quality;
+    @DatabaseField(generatedId = true)
+    int target;
+    @DatabaseField(generatedId = true)
+    int source;
+
+    @DatabaseField(generatedId = true)
     @JsonDeserialize(using = LinkTypeDeserializer.class)
     LinkType type;
 
@@ -18,12 +34,12 @@ public class Link {
 
     }
 
-    public String getId() {
-        return id;
+    public String getRemoteId() {
+        return remoteId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRemoteId(String remoteId) {
+        this.remoteId = remoteId;
     }
 
     public String getClient() {
@@ -74,7 +90,7 @@ public class Link {
     @Override
     public String toString() {
         return "Link{" +
-                "id='" + id + '\'' +
+                "id='" + remoteId + '\'' +
                 ", client='" + client + '\'' +
                 ", quality='" + quality + '\'' +
                 ", target=" + target +
