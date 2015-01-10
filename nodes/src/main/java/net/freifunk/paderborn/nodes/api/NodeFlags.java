@@ -1,15 +1,17 @@
 package net.freifunk.paderborn.nodes.api;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.noveogroup.android.log.Logger;
-import com.noveogroup.android.log.LoggerManager;
+import com.fasterxml.jackson.annotation.*;
+import com.noveogroup.android.log.*;
 
 /**
- * Class to represent node flags.
+ * Class to represent node flags. Directly flattened into Node attributes.
  */
 public class NodeFlags {
     public static final Logger LOGGER = LoggerManager.getLogger();
-    boolean legacy, gateway, client, online;
+    boolean legacy = false;
+    boolean gateway = false;
+    boolean client = false;
+    boolean online = false;
 
     public NodeFlags() {
     }

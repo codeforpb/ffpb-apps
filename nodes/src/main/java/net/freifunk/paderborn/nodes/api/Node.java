@@ -1,8 +1,7 @@
 package net.freifunk.paderborn.nodes.api;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.noveogroup.android.log.Logger;
-import com.noveogroup.android.log.LoggerManager;
+import com.fasterxml.jackson.annotation.*;
+import com.noveogroup.android.log.*;
 
 /**
  * Class to represent nodes.
@@ -12,10 +11,16 @@ public class Node {
     public static final Logger LOGGER = LoggerManager.getLogger();
     private static final int GEO_LAT_INDEX = 0,
             GEO_LON_INDEX = 1;
-    String firmware, name, id, macs;
-    NodeFlags flags;
-    double[] geo;
-    int clientcount;
+
+    String firmware;
+    String name;
+    String id;
+    String macs;
+    int clientcount = 0;
+    boolean legacy = false;
+    boolean gateway = false;
+    boolean client = false;
+    boolean online = false;
 
     double lat, lon;
 
@@ -23,34 +28,37 @@ public class Node {
     }
 
     public double getLat() {
-        return geo[GEO_LAT_INDEX];
+        return lat;
     }
 
     public void setLat(double lat) {
-        this.geo[GEO_LAT_INDEX] = lat;
+        this.lat = lat;
     }
 
     public double getLon() {
-        return geo[GEO_LON_INDEX];
+        return lon;
     }
 
     public void setLon(double lon) {
-        this.geo[GEO_LON_INDEX] = lon;
+        this.lon = lon;
     }
 
     public void setGeo(double[] geo) {
         if (geo != null && geo.length != 2) {
             throw new IllegalArgumentException("Geo coordinates must be 'null' or have exact two coordinates.");
         }
-        this.geo = geo;
-    }
-
-    public NodeFlags getFlags() {
-        return flags;
+        this.lat = geo[GEO_LAT_INDEX];
+        this.lon = geo[GEO_LON_INDEX];
     }
 
     public void setFlags(NodeFlags flags) {
-        this.flags = flags;
+        if (flags == null) {
+            return;
+        }
+        this.legacy = flags.isLegacy();
+        this.gateway = flags.isGateway();
+        this.client = flags.isClient();
+        this.online = flags.isOnline();
     }
 
     public String getFirmware() {
