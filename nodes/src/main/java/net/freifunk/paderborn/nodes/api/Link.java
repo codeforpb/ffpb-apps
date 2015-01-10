@@ -6,6 +6,8 @@ import com.j256.ormlite.field.*;
 import com.j256.ormlite.logger.*;
 import com.j256.ormlite.table.*;
 
+import java.util.*;
+
 /**
  * Class to represent Links.
  */
@@ -15,20 +17,21 @@ public class Link {
 
     @DatabaseField(generatedId = true)
     long _id;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     String remoteId;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     String client;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     String quality;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     int target;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     int source;
 
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     @JsonDeserialize(using = LinkTypeDeserializer.class)
     LinkType type;
+    private Date timeStamp;
 
     public Link() {
 
@@ -97,5 +100,13 @@ public class Link {
                 ", source=" + source +
                 ", type=" + type +
                 '}';
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

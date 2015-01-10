@@ -7,6 +7,8 @@ import com.j256.ormlite.field.*;
 import com.j256.ormlite.table.*;
 import com.noveogroup.android.log.*;
 
+import java.util.*;
+
 /**
  * Class to represent nodes.
  */
@@ -41,6 +43,7 @@ public class Node {
     double lat;
     @DatabaseField(generatedId = true)
     double lon;
+    private Date timeStamp;
 
     public Node() {
     }
@@ -122,5 +125,13 @@ public class Node {
     @JsonAnySetter
     public void setAny(String key, Object o) {
         LOGGER.w("Got Json: {} -> {}", key, o);
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
