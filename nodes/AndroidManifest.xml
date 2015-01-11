@@ -42,7 +42,7 @@
                 android:resource="@xml/authenticator"/>
         </service>
         <provider
-            android:name="net.freifunk.paderborn.nodes.sync.StubContentProvider_"
+            android:name=".sync.FfpbNodesContentProvider_"
             android:authorities="@string/accountAuthority"
             android:exported="false"
             android:syncable="true"/>
