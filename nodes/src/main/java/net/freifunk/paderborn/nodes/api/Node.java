@@ -7,21 +7,25 @@ import com.j256.ormlite.field.*;
 import com.j256.ormlite.table.*;
 import com.noveogroup.android.log.*;
 
+import net.freifunk.paderborn.nodes.persistence.*;
+
 import java.util.*;
 
 /**
  * Class to represent nodes.
  */
-@DatabaseTable(tableName = Node.NODES)
+@DatabaseTable(tableName = Node.NODES, daoClass = NodeDao.class)
 public class Node {
 
     public static final Logger LOGGER = LoggerManager.getLogger();
     public static final String NODES = "nodes";
+    public static final String REMOTE_ID = "remoteId";
     private static final int GEO_LAT_INDEX = 0,
             GEO_LON_INDEX = 1;
     @DatabaseField(generatedId = true, columnName = BaseColumns._ID)
     long _id;
-    @DatabaseField(unique = true)
+    @DatabaseField(columnName = REMOTE_ID, unique = true)
+    @JsonProperty("id")
     String remoteId;
     @DatabaseField
     String name;
@@ -39,9 +43,9 @@ public class Node {
     boolean client = false;
     @DatabaseField
     boolean online = false;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     double lat;
-    @DatabaseField(generatedId = true)
+    @DatabaseField
     double lon;
     private Date timeStamp;
 
@@ -67,6 +71,9 @@ public class Node {
     public void setGeo(double[] geo) {
         if (geo != null && geo.length != 2) {
             throw new IllegalArgumentException("Geo coordinates must be 'null' or have exact two coordinates.");
+        }
+        if (geo == null) {
+            return;
         }
         this.lat = geo[GEO_LAT_INDEX];
         this.lon = geo[GEO_LON_INDEX];
@@ -133,5 +140,24 @@ public class Node {
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "_id=" + _id +
+                ", remoteId='" + remoteId + '\'' +
+                ", name='" + name + '\'' +
+                ", firmware='" + firmware + '\'' +
+                ", macs='" + macs + '\'' +
+                ", clientcount=" + clientcount +
+                ", legacy=" + legacy +
+                ", gateway=" + gateway +
+                ", client=" + client +
+                ", online=" + online +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                ", timeStamp=" + timeStamp +
+                '}';
     }
 }
