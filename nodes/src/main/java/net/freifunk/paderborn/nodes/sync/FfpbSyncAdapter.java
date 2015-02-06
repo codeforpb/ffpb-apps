@@ -43,41 +43,27 @@ public class FfpbSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
-        NodesJson nodesJson = downloadData();
+        LOGGER.info("onPerformSync(...)");
+        StrippedDownNodesJson nodesJson = downloadData();
         persistData(nodesJson);
+        LOGGER.info("onPerformSync(...) done");
     }
 
-    private void persistData(NodesJson nodesJson) {
+    private void persistData(StrippedDownNodesJson nodesJson) {
         if (nodesJson == null) {
             return;
         }
 
         try {
             persist(nodesJson.getNodes(), nodesJson.getMeta());
-            persist(nodesJson.getLinks(), nodesJson.getMeta());
         } catch (SQLException e) {
             // FIXME handle
             Log.e(FfpbSyncAdapter.class.getName(), "Error", e);
         }
     }
 
-    private void persist(Link[] links, MetaInformation meta) throws SQLException {
-        Dao<Link, Long> linkDao = mDatabaseHelper.getLinkDao();
-        int created = 0, updated = 0;
-        for (Link link : links) {
-            link.setTimeStamp(meta.getTimestamp());
-            Dao.CreateOrUpdateStatus status = linkDao.createOrUpdate(link);
-            if (status.isCreated()) {
-                created++;
-            } else {
-                updated++;
-            }
-        }
-
-        LOGGER.info("Created {} and updated {} links", created, updated);
-    }
-
     private void persist(Node[] nodes, MetaInformation meta) throws SQLException {
+        LOGGER.debug("persist()");
         Dao<Node, Long> nodeDao = mDatabaseHelper.getNodeDao();
         int created = 0, updated = 0;
         for (Node node : nodes) {
@@ -93,13 +79,16 @@ public class FfpbSyncAdapter extends AbstractThreadedSyncAdapter {
         LOGGER.info("Created {} and updated {} nodes", created, updated);
     }
 
-    private NodesJson downloadData() {
+    private StrippedDownNodesJson downloadData() {
+        LOGGER.debug("downloadData()");
         try {
-            NodesJson nodesJson = mNodesJsonApi.getNodesJson();
+            StrippedDownNodesJson nodesJson = mNodesJsonApi.getNodesJson();
+            LOGGER.debug("downloadData() - done");
             return nodesJson;
         } catch (RestClientException e) {
             LOGGER.warn("RestClientException: {}", e);
         }
+        LOGGER.debug("downloadData() - errored");
         return null;
     }
 

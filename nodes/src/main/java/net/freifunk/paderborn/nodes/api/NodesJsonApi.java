@@ -1,8 +1,7 @@
 package net.freifunk.paderborn.nodes.api;
 
-import org.androidannotations.annotations.rest.Get;
-import org.androidannotations.annotations.rest.Rest;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.androidannotations.annotations.rest.*;
+import org.springframework.http.converter.json.*;
 
 /**
  * An api-interface to get some freifunk-data from the map page.
@@ -11,6 +10,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 public interface NodesJsonApi {
 
     @Get("")
-    public NodesJson getNodesJson();
+    public StrippedDownNodesJson getNodesJson();
 
 }
