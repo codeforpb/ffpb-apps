@@ -8,14 +8,15 @@ import org.androidannotations.annotations.*;
 
 /**
  * A content provider for the Sync Adapter. Right now most things are stubbed.
- *
+ * <p/>
  * Path structure: (authority: net.freifunk.paderborn)
  * /nodes - list of nodes
  * /nodes/(#|*) - single node via (id|remote id)
  * /nodes/(#|*)/field - value of field on single node identified via (id|remote id) [only important!]
  * /links - list of links
  * /links/(#|*) - single link via (id|remote id)
- *
+ * <p/>
+ * http://developer.android.com/guide/topics/providers/content-provider-creating.html
  */
 @EProvider
 public class FfpbNodesContentProvider extends ContentProvider {
