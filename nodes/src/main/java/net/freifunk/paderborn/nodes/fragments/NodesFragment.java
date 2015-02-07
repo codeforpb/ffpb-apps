@@ -13,6 +13,7 @@ import net.freifunk.paderborn.nodes.sync.*;
 
 import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.Trace;
+import org.androidannotations.annotations.res.*;
 import org.androidannotations.annotations.rest.*;
 import org.slf4j.*;
 
@@ -25,13 +26,16 @@ import java.sql.SQLException;
 public class NodesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int LOADER_ID = 0;
     public static final Logger LOGGER = LoggerFactory.getLogger(NodesFragment.class);
+    private static final int ONLINE_INDEX = 2;
     @RestService
     NodesJsonApi mNodesJsonApi;
     @ViewById
     ListView list;
     @ViewById
     View empty;
-    private String[] mProjection = {Node.NAME, Node.STARRED, Node.REMOTE_ID, Node._ID};
+    @ColorRes
+    int nodeOnline, nodeOffline;
+    private String[] mProjection = {Node.NAME, Node.STARRED, Node.ONLINE, Node.REMOTE_ID, Node._ID};
     private SimpleCursorAdapter mAdapter;
 
     @AfterViews
@@ -44,6 +48,16 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
         mAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (R.id.textName == view.getId()) {
+                    ((TextView) view).setText(cursor.getString(columnIndex));
+                    boolean isOnline = (cursor.getInt(ONLINE_INDEX) == 1);
+                    if (isOnline) {
+                        ((TextView) view).setTextColor(nodeOnline);
+                    } else {
+                        ((TextView) view).setTextColor(nodeOffline);
+
+                    }
+                }
                 if (R.id.imageStarred == view.getId()) {
                     int boolAsInt = cursor.getInt(columnIndex);
                     boolean isStarred = (boolAsInt == 1);

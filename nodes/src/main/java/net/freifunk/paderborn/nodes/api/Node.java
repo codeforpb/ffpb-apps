@@ -23,6 +23,7 @@ public class Node {
     public static final String _ID = BaseColumns._ID;
     public static final String NAME = "name";
     public static final String STARRED = "starred";
+    public static final String ONLINE = "online";
     private static final int GEO_LAT_INDEX = 0,
             GEO_LON_INDEX = 1;
     @DatabaseField(generatedId = true, columnName = _ID)
@@ -44,7 +45,7 @@ public class Node {
     boolean gateway = false;
     @DatabaseField
     boolean client = false;
-    @DatabaseField
+    @DatabaseField(columnName = ONLINE)
     boolean online = false;
     @DatabaseField
     double lat;
