@@ -24,14 +24,22 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "nodes.db";
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.class);
+    private static DatabaseHelper sInstance;
     private final AccountCreator_ mAccountCreator;
     private final ContentResolver mContentResolver;
     private Dao<Node, Long> nodeDao;
 
-    public DatabaseHelper(Context context) {
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mAccountCreator = AccountCreator_.getInstance_(context);
         mContentResolver = context.getContentResolver();
+    }
+
+    public static DatabaseHelper getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new DatabaseHelper(context);
+        }
+        return sInstance;
     }
 
     @Override

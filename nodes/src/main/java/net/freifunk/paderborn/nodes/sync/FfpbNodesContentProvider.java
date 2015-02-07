@@ -25,7 +25,7 @@ public class FfpbNodesContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        mDatabaseHelper = new DatabaseHelper(getContext());
+        mDatabaseHelper = DatabaseHelper.getInstance(getContext());
         return true;
     }
 
