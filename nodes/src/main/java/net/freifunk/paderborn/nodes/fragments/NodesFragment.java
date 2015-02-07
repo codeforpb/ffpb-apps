@@ -9,13 +9,11 @@ import android.widget.*;
 
 import net.freifunk.paderborn.nodes.*;
 import net.freifunk.paderborn.nodes.api.*;
-import net.freifunk.paderborn.nodes.persistence.*;
 import net.freifunk.paderborn.nodes.sync.*;
 
 import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.Trace;
 import org.androidannotations.annotations.rest.*;
-import org.slf4j.*;
 
 import java.sql.SQLException;
 
@@ -24,7 +22,6 @@ import java.sql.SQLException;
  */
 @EFragment(R.layout.fragment_nodes)
 public class NodesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    public static final Logger LOGGER = LoggerFactory.getLogger(NodesFragment.class);
     public static final int LOADER_ID = 0;
     @RestService
     NodesJsonApi mNodesJsonApi;
@@ -32,7 +29,6 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
     ListView list;
     @ViewById
     View empty;
-    private DatabaseHelper mDatabaseHelper;
     private String[] mProjection = {Node.NAME, Node.REMOTE_ID, Node._ID};
     private CursorAdapter mAdapter;
     private Cursor mActiveCursor;
