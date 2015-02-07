@@ -31,6 +31,7 @@ public class FfpbNodesApplication extends Application {
 
         Bundle forceBundle = new Bundle();
         forceBundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        forceBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         getContentResolver().requestSync(account, authority, forceBundle);
         LOGGER.debug("Setup synchronization and forced sync.");
     }

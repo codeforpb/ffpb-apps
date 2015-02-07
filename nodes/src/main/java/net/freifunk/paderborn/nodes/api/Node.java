@@ -22,6 +22,7 @@ public class Node {
     public static final String REMOTE_ID = "remoteId";
     public static final String _ID = BaseColumns._ID;
     public static final String NAME = "name";
+    public static final String STARRED = "starred";
     private static final int GEO_LAT_INDEX = 0,
             GEO_LON_INDEX = 1;
     @DatabaseField(generatedId = true, columnName = _ID)
@@ -49,9 +50,19 @@ public class Node {
     double lat;
     @DatabaseField
     double lon;
+    @DatabaseField(columnName = STARRED, defaultValue = "0")
+    boolean starred;
     private Date timeStamp;
 
     public Node() {
+    }
+
+    public boolean isStarred() {
+        return starred;
+    }
+
+    public void setStarred(boolean starred) {
+        this.starred = starred;
     }
 
     public double getLat() {

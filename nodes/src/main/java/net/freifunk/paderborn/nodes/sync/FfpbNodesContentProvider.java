@@ -39,7 +39,7 @@ public class FfpbNodesContentProvider extends ContentProvider {
         switch (match) {
             case FfpbUriMatcher.MATCH_NODES:
                 if (TextUtils.isEmpty(sortOrder)) {
-                    sortOrder = Node.NAME + " ASC";
+                    sortOrder = Node.STARRED + " DESC, " + Node.NAME + " ASC ";
                 }
                 break;
             case FfpbUriMatcher.MATCH_NODE_VIA_LOCAL_ID:
