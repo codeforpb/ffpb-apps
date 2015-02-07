@@ -4,6 +4,7 @@ package net.freifunk.paderborn.nodes;
 import android.os.*;
 import android.support.v4.app.*;
 import android.support.v7.app.*;
+import android.support.v7.widget.*;
 
 import net.freifunk.paderborn.nodes.fragments.*;
 
@@ -17,15 +18,19 @@ import org.slf4j.*;
 public class NodeDetails extends ActionBarActivity {
     @Extra(value = NodeDetailsFragment.KEY_ARG_ID)
     long nodeId;
+    @ViewById
+    Toolbar toolbar;
 
     Logger LOGGER = LoggerFactory.getLogger(NodeDetails.class);
+
 
     @AfterViews
     void bindFragment() {
         LOGGER.warn("bindFragment()");
+        setSupportActionBar(toolbar);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragment = NodeDetailsFragment.newInstance(nodeId);
-        ft.replace(android.R.id.content, fragment, "fragment");
+        ft.replace(R.id.fragment, fragment, "fragment");
         ft.commit();
         LOGGER.debug("bindFragment() done");
     }
@@ -33,7 +38,6 @@ public class NodeDetails extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @OptionsItem(android.R.id.home)

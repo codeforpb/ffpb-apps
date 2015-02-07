@@ -33,8 +33,9 @@
 
         <activity
             android:name="net.freifunk.paderborn.nodes.NodeDetails_"
-            android:label="Details">
-            <meta-data
+            android:label="Details"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.freifunk.paderborn.nodes.Nodes_"/>
 
