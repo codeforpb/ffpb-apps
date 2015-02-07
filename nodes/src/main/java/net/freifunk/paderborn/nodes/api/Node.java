@@ -93,6 +93,14 @@ public class Node {
         this.lon = geo[GEO_LON_INDEX];
     }
 
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
     public void setFlags(NodeFlags flags) {
         if (flags == null) {
             return;

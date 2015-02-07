@@ -12,6 +12,7 @@ import net.freifunk.paderborn.nodes.api.*;
 import net.freifunk.paderborn.nodes.persistence.*;
 
 import org.androidannotations.annotations.*;
+import org.androidannotations.annotations.res.*;
 import org.slf4j.*;
 
 import java.sql.*;
@@ -25,9 +26,15 @@ public class NodeDetailsFragment extends Fragment {
     public static final String KEY_ARG_ID = "KEY_ARG_ID";
     public static final Logger LOGGER = LoggerFactory.getLogger(NodeDetailsFragment.class);
     @ViewById
-    TextView textName;
+    TextView textName,
+            textRemoteId, textClientCount, textFirmware, textMacs;
+
     @ViewById
     CheckBox checkBoxStarred;
+
+    @ColorRes
+    int nodeOnline, nodeOffline;
+
     private Node mNode;
 
     public static Fragment newInstance(long _id) {
@@ -73,6 +80,13 @@ public class NodeDetailsFragment extends Fragment {
     @UiThread
     void showData() {
         textName.setText(mNode.getName());
+        int onlineStatusColor = (mNode.isOnline()) ? nodeOnline : nodeOffline;
+        textName.setTextColor(onlineStatusColor);
+        textRemoteId.setText(mNode.getRemoteId());
+        textClientCount.setText("" + mNode.getClientcount());
+        textFirmware.setText(mNode.getFirmware());
+        textMacs.setText(mNode.getMacs());
+
         checkBoxStarred.setChecked(mNode.isStarred());
         LOGGER.debug("showData() done");
     }
