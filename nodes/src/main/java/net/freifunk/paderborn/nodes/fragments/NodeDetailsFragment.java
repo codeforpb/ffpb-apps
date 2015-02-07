@@ -2,6 +2,7 @@ package net.freifunk.paderborn.nodes.fragments;
 
 import android.os.*;
 import android.support.v4.app.*;
+import android.view.*;
 import android.widget.*;
 
 import com.j256.ormlite.dao.*;
@@ -36,8 +37,9 @@ public class NodeDetailsFragment extends Fragment {
     int nodeOnline, nodeOffline;
 
     private Node mNode;
+    private NodeDetails host;
 
-    public static Fragment newInstance(long _id) {
+    public static NodeDetailsFragment newInstance(long _id) {
         LOGGER.debug("newInstance({})", _id);
 
         Bundle args = new Bundle();
@@ -79,16 +81,25 @@ public class NodeDetailsFragment extends Fragment {
 
     @UiThread
     void showData() {
-        textName.setText(mNode.getName());
-        int onlineStatusColor = (mNode.isOnline()) ? nodeOnline : nodeOffline;
-        textName.setTextColor(onlineStatusColor);
+        showNameAndStatus();
         textRemoteId.setText(mNode.getRemoteId());
         textClientCount.setText("" + mNode.getClientcount());
         textFirmware.setText(mNode.getFirmware());
         textMacs.setText(mNode.getMacs());
-
         checkBoxStarred.setChecked(mNode.isStarred());
         LOGGER.debug("showData() done");
+    }
+
+    private void showNameAndStatus() {
+        int onlineStatusColor = (mNode.isOnline()) ? nodeOnline : nodeOffline;
+        if (host != null) {
+            host.setToolbarInfos(mNode.getName(), onlineStatusColor);
+            textName.setVisibility(View.GONE);
+        } else {
+            textName.setText(mNode.getName());
+            textName.setTextColor(onlineStatusColor);
+            textName.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -110,5 +121,13 @@ public class NodeDetailsFragment extends Fragment {
             LOGGER.error("Could not save changes.", e);
         }
 
+    }
+
+    public NodeDetails getHost() {
+        return host;
+    }
+
+    public void setHost(NodeDetails host) {
+        this.host = host;
     }
 }

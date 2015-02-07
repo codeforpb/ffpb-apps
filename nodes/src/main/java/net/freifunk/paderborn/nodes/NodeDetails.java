@@ -1,7 +1,6 @@
 package net.freifunk.paderborn.nodes;
 
 
-import android.os.*;
 import android.support.v4.app.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.*;
@@ -28,20 +27,23 @@ public class NodeDetails extends ActionBarActivity {
     void bindFragment() {
         LOGGER.warn("bindFragment()");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = NodeDetailsFragment.newInstance(nodeId);
+        NodeDetailsFragment fragment = NodeDetailsFragment.newInstance(nodeId);
+        fragment.setHost(this);
         ft.replace(R.id.fragment, fragment, "fragment");
         ft.commit();
         LOGGER.debug("bindFragment() done");
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @OptionsItem(android.R.id.home)
     void navUp() {
         NavUtils.navigateUpFromSameTask(this);
+    }
+
+    public void setToolbarInfos(String name, int onlineStatusColor) {
+        toolbar.setTitle(name);
+        toolbar.setBackgroundColor(onlineStatusColor);
     }
 }
