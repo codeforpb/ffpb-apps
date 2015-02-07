@@ -27,14 +27,14 @@ public class NodeDetailsFragment extends Fragment {
     public static final String KEY_ARG_ID = "KEY_ARG_ID";
     public static final Logger LOGGER = LoggerFactory.getLogger(NodeDetailsFragment.class);
     @ViewById
-    TextView textName,
-            textRemoteId, textClientCount, textFirmware, textMacs;
-
-    @ViewById
-    CheckBox checkBoxStarred;
+    TextView textRemoteId, textClientCount, textFirmware, textMacs;
 
     @ColorRes
     int nodeOnline, nodeOffline;
+
+    @OptionsMenuItem
+    MenuItem abStar;
+
 
     private Node mNode;
     private NodeDetails host;
@@ -52,6 +52,12 @@ public class NodeDetailsFragment extends Fragment {
 
         LOGGER.debug("newInstance({}) done", _id);
         return fragment;
+    }
+
+    @OptionsItem(R.id.abStar)
+    void toggleStarred() {
+        mNode.setStarred(!mNode.isStarred());
+        showStar();
     }
 
     @AfterViews
@@ -82,24 +88,17 @@ public class NodeDetailsFragment extends Fragment {
     @UiThread
     void showData() {
         showNameAndStatus();
+        showStar();
         textRemoteId.setText(mNode.getRemoteId());
         textClientCount.setText("" + mNode.getClientcount());
         textFirmware.setText(mNode.getFirmware());
         textMacs.setText(mNode.getMacs());
-        checkBoxStarred.setChecked(mNode.isStarred());
         LOGGER.debug("showData() done");
     }
 
     private void showNameAndStatus() {
         int onlineStatusColor = (mNode.isOnline()) ? nodeOnline : nodeOffline;
-        if (host != null) {
-            host.setToolbarInfos(mNode.getName(), onlineStatusColor);
-            textName.setVisibility(View.GONE);
-        } else {
-            textName.setText(mNode.getName());
-            textName.setTextColor(onlineStatusColor);
-            textName.setVisibility(View.VISIBLE);
-        }
+        host.setToolbarInfos(mNode.getName(), onlineStatusColor);
     }
 
     @Override
@@ -114,13 +113,30 @@ public class NodeDetailsFragment extends Fragment {
             DatabaseHelper helper = DatabaseHelper.getInstance(getActivity());
             ConnectionSource connectionSource = helper.getConnectionSource();
             Dao<Node, ?> dao = DaoManager.createDao(connectionSource, Node.class);
-            mNode.setStarred(checkBoxStarred.isChecked());
             dao.update(mNode);
             LOGGER.info("Updated DB entry.");
         } catch (SQLException e) {
             LOGGER.error("Could not save changes.", e);
         }
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        showStar();
+    }
+
+    private void showStar() {
+        if (abStar == null) {
+            return;
+        }
+
+        if (mNode.isStarred()) {
+            abStar.setIcon(R.drawable.ic_action_important);
+        } else {
+            abStar.setIcon(R.drawable.ic_action_not_important);
+        }
     }
 
     public NodeDetails getHost() {

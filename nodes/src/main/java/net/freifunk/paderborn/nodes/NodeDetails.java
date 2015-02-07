@@ -14,6 +14,7 @@ import org.slf4j.*;
  * Created by ljan on 07.02.15.
  */
 @EActivity(R.layout.activity_node_details)
+@OptionsMenu(R.menu.star)
 public class NodeDetails extends ActionBarActivity {
     @Extra(value = NodeDetailsFragment.KEY_ARG_ID)
     long nodeId;
@@ -41,6 +42,7 @@ public class NodeDetails extends ActionBarActivity {
     void navUp() {
         NavUtils.navigateUpFromSameTask(this);
     }
+
 
     public void setToolbarInfos(String name, int onlineStatusColor) {
         toolbar.setTitle(name);
