@@ -25,24 +25,38 @@ import java.sql.SQLException;
 public class NodesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int LOADER_ID = 0;
     public static final Logger LOGGER = LoggerFactory.getLogger(NodesFragment.class);
-    private static final int LOCAL_ID_COLUMN = 2;
     @RestService
     NodesJsonApi mNodesJsonApi;
     @ViewById
     ListView list;
     @ViewById
     View empty;
-    private String[] mProjection = {Node.NAME, Node.REMOTE_ID, Node._ID};
-    private CursorAdapter mAdapter;
-    private Cursor mActiveCursor;
+    private String[] mProjection = {Node.NAME, Node.STARRED, Node.REMOTE_ID, Node._ID};
+    private SimpleCursorAdapter mAdapter;
 
     @AfterViews
     @Trace
     void demoLoad() {
         mAdapter = new SimpleCursorAdapter(getActivity(),
-                android.R.layout.simple_list_item_1,
+                R.layout.list_item_node,
                 null,
-                mProjection, new int[]{android.R.id.text1}, 0);
+                mProjection, new int[]{R.id.textName, R.id.imageStarred}, 0);
+        mAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (R.id.imageStarred == view.getId()) {
+                    int boolAsInt = cursor.getInt(columnIndex);
+                    boolean isStarred = (boolAsInt == 1);
+                    if (isStarred) {
+                        ((ImageView) view).setImageResource(R.drawable.ic_action_important);
+                    } else {
+                        ((ImageView) view).setImageResource(R.drawable.ic_action_not_important);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
         list.setEmptyView(empty);
         list.setAdapter(mAdapter);
         getLoaderManager().initLoader(LOADER_ID, null, this);
@@ -69,7 +83,6 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public void onLoadFinished(Loader loader, Cursor cursor) {
-        mActiveCursor = cursor;
         mAdapter.swapCursor(cursor);
     }
 
