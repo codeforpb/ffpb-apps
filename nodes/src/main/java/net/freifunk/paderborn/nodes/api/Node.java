@@ -14,20 +14,22 @@ import java.util.*;
 /**
  * Class to represent nodes.
  */
-@DatabaseTable(tableName = Node.NODES, daoClass = NodeDao.class)
+@DatabaseTable(tableName = Node.TABLE, daoClass = NodeDao.class)
 public class Node {
 
     public static final Logger LOGGER = LoggerManager.getLogger();
-    public static final String NODES = "nodes";
+    public static final String TABLE = "nodes";
     public static final String REMOTE_ID = "remoteId";
+    public static final String _ID = BaseColumns._ID;
+    public static final String NAME = "name";
     private static final int GEO_LAT_INDEX = 0,
             GEO_LON_INDEX = 1;
-    @DatabaseField(generatedId = true, columnName = BaseColumns._ID)
+    @DatabaseField(generatedId = true, columnName = _ID)
     long _id;
     @DatabaseField(columnName = REMOTE_ID, unique = true)
     @JsonProperty("id")
     String remoteId;
-    @DatabaseField
+    @DatabaseField(columnName = NAME)
     String name;
     @DatabaseField
     String firmware;
@@ -140,6 +142,14 @@ public class Node {
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public long get_id() {
+        return _id;
+    }
+
+    public void set_id(long _id) {
+        this._id = _id;
     }
 
     @Override

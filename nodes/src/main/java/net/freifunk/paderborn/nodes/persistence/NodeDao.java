@@ -23,7 +23,8 @@ public class NodeDao extends BaseDaoImpl<Node, Long> {
             int createdLines = super.create(node);
             return new CreateOrUpdateStatus(true, false, createdLines);
         } else if (nodes.size() == 1) {
-            int updatedLines = super.create(node);
+            node.set_id(nodes.get(0).get_id());
+            int updatedLines = super.update(node);
             return new CreateOrUpdateStatus(false, true, updatedLines);
         }
         return new CreateOrUpdateStatus(false, false, 0);
