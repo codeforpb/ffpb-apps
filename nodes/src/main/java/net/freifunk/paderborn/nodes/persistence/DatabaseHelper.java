@@ -29,7 +29,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private final ContentResolver mContentResolver;
     private Dao<Node, Long> nodeDao;
 
-    private DatabaseHelper(Context context) {
+    /**
+     * Use getInstance instead!
+     *
+     * @param context
+     * @deprecated This constructor should only be used for singleton instantiation
+     */
+    @Deprecated
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mAccountCreator = AccountCreator_.getInstance_(context);
         mContentResolver = context.getContentResolver();
@@ -37,6 +44,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     public static DatabaseHelper getInstance(Context context) {
         if (sInstance == null) {
+            //noinspection deprecation
             sInstance = new DatabaseHelper(context);
         }
         return sInstance;

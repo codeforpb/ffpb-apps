@@ -31,6 +31,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="net.freifunk.paderborn.nodes.NodeDetails_"
+            android:label="Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.freifunk.paderborn.nodes.Nodes_"/>
+
+        </activity>
 
         <service
             android:name="net.freifunk.paderborn.nodes.sync.FfpbAuthenticatorService_">

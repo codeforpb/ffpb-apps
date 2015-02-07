@@ -14,6 +14,7 @@ import net.freifunk.paderborn.nodes.sync.*;
 import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.Trace;
 import org.androidannotations.annotations.rest.*;
+import org.slf4j.*;
 
 import java.sql.SQLException;
 
@@ -23,6 +24,8 @@ import java.sql.SQLException;
 @EFragment(R.layout.fragment_nodes)
 public class NodesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int LOADER_ID = 0;
+    public static final Logger LOGGER = LoggerFactory.getLogger(NodesFragment.class);
+    private static final int LOCAL_ID_COLUMN = 2;
     @RestService
     NodesJsonApi mNodesJsonApi;
     @ViewById
@@ -76,10 +79,8 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @ItemClick(android.R.id.list)
     void itemClick(int pos) {
-        if (mActiveCursor != null) {
-            mActiveCursor.moveToPosition(pos);
-            String string = mActiveCursor.getString(0) + " (" + mActiveCursor.getString(1) + ")";
-            Toast.makeText(getActivity(), string, Toast.LENGTH_LONG).show();
-        }
+        long _id = mAdapter.getItemId(pos);
+        NodeDetails_.intent(this).nodeId(_id).start();
+        LOGGER.debug("Started details..");
     }
 }
