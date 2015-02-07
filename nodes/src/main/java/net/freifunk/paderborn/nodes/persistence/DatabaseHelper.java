@@ -27,7 +27,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private final AccountCreator_ mAccountCreator;
     private final ContentResolver mContentResolver;
     private Dao<Node, Long> nodeDao;
-    private Dao<Link, Long> linkDao;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +38,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTableIfNotExists(connectionSource, Node.class);
-            TableUtils.createTableIfNotExists(connectionSource, Link.class);
         } catch (SQLException e) {
             LOGGER.error("Could not create database", e);
         }
@@ -49,7 +47,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, Node.class, true);
-            TableUtils.dropTable(connectionSource, Link.class, true);
+            database.execSQL("DROP TABLE IF EXISTS links;");
             onCreate(database, connectionSource);
             requestSync();
             LOGGER.info("Updated db.");
@@ -75,13 +73,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             nodeDao = getDao(Node.class);
         }
         return nodeDao;
-    }
-
-    public Dao<Link, Long> getLinkDao() throws SQLException {
-        if (linkDao == null) {
-            linkDao = getDao(Link.class);
-        }
-        return linkDao;
     }
 
 
