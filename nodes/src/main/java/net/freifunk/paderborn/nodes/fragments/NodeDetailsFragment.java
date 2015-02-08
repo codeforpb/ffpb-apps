@@ -128,7 +128,7 @@ public class NodeDetailsFragment extends Fragment {
     }
 
     private void showStar() {
-        if (abStar == null) {
+        if (abStar == null || mNode == null) {
             return;
         }
 

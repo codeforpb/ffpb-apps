@@ -4,6 +4,7 @@ import android.database.*;
 import android.os.*;
 import android.support.v4.app.*;
 import android.support.v4.content.*;
+import android.text.*;
 import android.view.*;
 import android.widget.*;
 
@@ -26,6 +27,7 @@ import java.sql.SQLException;
 public class NodesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int LOADER_ID = 0;
     public static final Logger LOGGER = LoggerFactory.getLogger(NodesFragment.class);
+    public static final String KEY_SEARCH_TEXT = "SEARCH_TEXT";
     private static final int ONLINE_INDEX = 2;
     @RestService
     NodesJsonApi mNodesJsonApi;
@@ -33,6 +35,10 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
     ListView list;
     @ViewById
     View empty;
+
+    @ViewById
+    EditText textSearch;
+
     @ColorRes
     int nodeOnline, nodeOffline;
     private String[] mProjection = {Node.NAME, Node.STARRED, Node.ONLINE, Node.REMOTE_ID, Node._ID};
@@ -73,7 +79,7 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
         });
         list.setEmptyView(empty);
         list.setAdapter(mAdapter);
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+        getLoaderManager().initLoader(LOADER_ID, Bundle.EMPTY, this);
     }
 
 
@@ -84,13 +90,23 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
-        String selection = Node.NAME + " IS NOT NULL AND " + Node.NAME + " != ''";
+        final String selection;
+        final String[] selectionArgs;
+        final String searchText = args.getString(KEY_SEARCH_TEXT, "");
+        if (TextUtils.isEmpty(searchText)) {
+            selection = Node.NAME + " IS NOT NULL AND " +
+                    Node.NAME + " != ''";
+            selectionArgs = null;
+        } else {
+            selection = Node.NAME + " LIKE ?";
+            selectionArgs = new String[]{"%" + searchText + "%"};
+        }
         CursorLoader loader = new CursorLoader(
                 this.getActivity(),
                 FfpbUriMatcher.NODES_URI,
                 mProjection,
                 selection,
-                null,
+                selectionArgs,
                 null);
         return loader;
     }
@@ -102,6 +118,7 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public void onLoaderReset(Loader loader) {
+        mAdapter.changeCursor(null);
     }
 
     @ItemClick(android.R.id.list)
@@ -110,4 +127,17 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
         NodeDetails_.intent(this).nodeId(_id).start();
         LOGGER.debug("Started details..");
     }
+
+    @AfterTextChange(R.id.textSearch)
+    void afterSearchTextChanged(Editable text, TextView searchView) {
+        search(text.toString());
+    }
+
+    public void search(String query) {
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_SEARCH_TEXT, query);
+        getLoaderManager().restartLoader(LOADER_ID, bundle, this);
+    }
+
+
 }
