@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
     <fragment
+        android:id="@+id/nodesFragment"
         android:name="net.freifunk.paderborn.nodes.fragments.NodesFragment_"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

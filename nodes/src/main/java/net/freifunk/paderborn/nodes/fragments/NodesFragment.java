@@ -36,9 +36,6 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
     @ViewById
     View empty;
 
-    @ViewById
-    EditText textSearch;
-
     @ColorRes
     int nodeOnline, nodeOffline;
     private String[] mProjection = {Node.NAME, Node.STARRED, Node.ONLINE, Node.REMOTE_ID, Node._ID};
@@ -126,11 +123,6 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
         long _id = mAdapter.getItemId(pos);
         NodeDetails_.intent(this).nodeId(_id).start();
         LOGGER.debug("Started details..");
-    }
-
-    @AfterTextChange(R.id.textSearch)
-    void afterSearchTextChanged(Editable text, TextView searchView) {
-        search(text.toString());
     }
 
     public void search(String query) {

@@ -29,13 +29,21 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
         </activity>
 
         <activity
             android:name="net.freifunk.paderborn.nodes.NodeDetails_"
             android:label="Details"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.freifunk.paderborn.nodes.Nodes_"/>
 
