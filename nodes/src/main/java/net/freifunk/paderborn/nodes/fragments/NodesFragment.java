@@ -87,17 +87,13 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
-        final String selection;
-        final String[] selectionArgs;
-        final String searchText = args.getString(KEY_SEARCH_TEXT, "");
-        if (TextUtils.isEmpty(searchText)) {
-            selection = Node.NAME + " IS NOT NULL AND " +
-                    Node.NAME + " != ''";
-            selectionArgs = null;
-        } else {
-            selection = Node.NAME + " LIKE ?";
-            selectionArgs = new String[]{"%" + searchText + "%"};
-        }
+        final String query = args.getString(KEY_SEARCH_TEXT, "");
+        final String nonEmptyNameQuery =
+                (TextUtils.isEmpty(query))
+                        ? "%_%"
+                        : "%" + query + "%";
+        final String selection = Node.NAME + " LIKE ?";
+        final String[] selectionArgs = new String[]{nonEmptyNameQuery};
         CursorLoader loader = new CursorLoader(
                 this.getActivity(),
                 FfpbUriMatcher.NODES_URI,
