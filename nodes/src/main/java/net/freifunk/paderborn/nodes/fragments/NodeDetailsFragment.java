@@ -27,7 +27,7 @@ public class NodeDetailsFragment extends Fragment {
     public static final String KEY_ARG_ID = "KEY_ARG_ID";
     public static final Logger LOGGER = LoggerFactory.getLogger(NodeDetailsFragment.class);
     @ViewById
-    TextView textRemoteId, textClientCount, textFirmware, textMacs;
+    TextView textRemoteId, textClientCount, textFirmware, textMacs, textGateway, textClient, textCoordinates;
 
     @ColorRes
     int nodeOnline, nodeOffline;
@@ -93,6 +93,9 @@ public class NodeDetailsFragment extends Fragment {
         textClientCount.setText("" + mNode.getClientcount());
         textFirmware.setText(mNode.getFirmware());
         textMacs.setText(mNode.getMacs());
+        textGateway.setText(mNode.isGateway() + "");
+        textClient.setText(mNode.isClient() + "");
+        textCoordinates.setText(mNode.getLat() + ", " + mNode.getLon());
         LOGGER.debug("showData() done");
     }
 

@@ -58,6 +58,14 @@ public class Node {
     public Node() {
     }
 
+    public boolean isGateway() {
+        return gateway;
+    }
+
+    public boolean isClient() {
+        return client;
+    }
+
     public boolean isStarred() {
         return starred;
     }
