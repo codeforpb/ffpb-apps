@@ -190,4 +190,8 @@ public class Node {
                 ", timeStamp=" + timeStamp +
                 '}';
     }
+
+    public void toggleStar() {
+        starred = !starred;
+    }
 }

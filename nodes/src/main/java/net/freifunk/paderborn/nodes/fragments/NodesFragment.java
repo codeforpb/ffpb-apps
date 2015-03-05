@@ -8,8 +8,12 @@ import android.text.*;
 import android.view.*;
 import android.widget.*;
 
+import com.j256.ormlite.dao.*;
+import com.j256.ormlite.support.*;
+
 import net.freifunk.paderborn.nodes.*;
 import net.freifunk.paderborn.nodes.api.*;
+import net.freifunk.paderborn.nodes.persistence.*;
 import net.freifunk.paderborn.nodes.sync.*;
 
 import org.androidannotations.annotations.*;
@@ -19,15 +23,19 @@ import org.androidannotations.annotations.rest.*;
 import org.slf4j.*;
 
 import java.sql.SQLException;
+import java.util.*;
 
 /**
- * Fragment to display a list of nodes
+ * Fragment to display a list of nodes. Hosted in Nodes-Activity
+ * @see net.freifunk.paderborn.nodes.Nodes
  */
 @EFragment(R.layout.fragment_nodes)
 public class NodesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int LOADER_ID = 0;
     public static final Logger LOGGER = LoggerFactory.getLogger(NodesFragment.class);
     public static final String KEY_SEARCH_TEXT = "SEARCH_TEXT";
+    public static final int COLUMN_ID = 4;
+    public static final int COLUMN_NAME = 0;
     private static final int ONLINE_INDEX = 2;
     @RestService
     NodesJsonApi mNodesJsonApi;
@@ -48,32 +56,7 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
                 R.layout.list_item_node,
                 null,
                 mProjection, new int[]{R.id.textName, R.id.imageStarred}, 0);
-        mAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                if (R.id.textName == view.getId()) {
-                    ((TextView) view).setText(cursor.getString(columnIndex));
-                    boolean isOnline = (cursor.getInt(ONLINE_INDEX) == 1);
-                    if (isOnline) {
-                        ((TextView) view).setTextColor(nodeOnline);
-                    } else {
-                        ((TextView) view).setTextColor(nodeOffline);
-
-                    }
-                }
-                if (R.id.imageStarred == view.getId()) {
-                    int boolAsInt = cursor.getInt(columnIndex);
-                    boolean isStarred = (boolAsInt == 1);
-                    if (isStarred) {
-                        ((ImageView) view).setImageResource(R.drawable.ic_action_important);
-                    } else {
-                        ((ImageView) view).setImageResource(R.drawable.ic_action_not_important);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
+        mAdapter.setViewBinder(new NodesListItemViewBinder());
         list.setEmptyView(empty);
         list.setAdapter(mAdapter);
         getLoaderManager().initLoader(LOADER_ID, Bundle.EMPTY, this);
@@ -127,5 +110,65 @@ public class NodesFragment extends Fragment implements LoaderManager.LoaderCallb
         getLoaderManager().restartLoader(LOADER_ID, bundle, this);
     }
 
+    private void toggleStarred(long _id) {
+        DatabaseHelper helper = DatabaseHelper.getInstance(getActivity());
+        ConnectionSource connectionSource = helper.getConnectionSource();
+        try {
+            Dao<Node, ?> dao = DaoManager.createDao(connectionSource, Node.class);
+            List<Node> nodes = dao.queryForEq(Node._ID, _id);
+            if (nodes.size() != 1) {
+                throw new IllegalStateException("Query for id returned size != 1");
+            }
+            Node node = nodes.get(0);
+            LOGGER.debug("node loaded");
+            node.toggleStar();
+            dao.update(node);
+        } catch (SQLException e) {
+            LOGGER.error("Could not start fragment: {}", e);
+        }
+        getActivity().getContentResolver().notifyChange(FfpbUriMatcher.NODES_URI, null, false);
+    }
 
+    private class NodesListItemViewBinder implements SimpleCursorAdapter.ViewBinder {
+        @Override
+        public boolean setViewValue(View view, final Cursor cursor, int columnIndex) {
+            if (R.id.textName == view.getId()) {
+                bindName((TextView) view, cursor, columnIndex);
+                return true;
+            }
+            final long _id = cursor.getLong(COLUMN_ID);
+            final String name = cursor.getString(COLUMN_NAME);
+            if (R.id.imageStarred == view.getId()) {
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toggleStarred(_id);
+                    }
+                });
+                bindFavoriteState((ImageView) view, cursor, columnIndex);
+                return true;
+            }
+            return false;
+        }
+
+        private void bindFavoriteState(ImageView view, Cursor cursor, int columnIndex) {
+            int boolAsInt = cursor.getInt(columnIndex);
+            boolean isStarred = (boolAsInt == 1);
+            if (isStarred) {
+                view.setImageResource(R.drawable.ic_action_important);
+            } else {
+                view.setImageResource(R.drawable.ic_action_not_important);
+            }
+        }
+
+        private void bindName(TextView view, Cursor cursor, int columnIndex) {
+            view.setText(cursor.getString(columnIndex));
+            boolean isOnline = (cursor.getInt(ONLINE_INDEX) == 1);
+            if (isOnline) {
+                view.setTextColor(nodeOnline);
+            } else {
+                view.setTextColor(nodeOffline);
+            }
+        }
+    }
 }
