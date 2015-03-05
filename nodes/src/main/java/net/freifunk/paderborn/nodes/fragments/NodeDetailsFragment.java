@@ -1,5 +1,6 @@
 package net.freifunk.paderborn.nodes.fragments;
 
+import android.content.res.*;
 import android.os.*;
 import android.support.v4.app.*;
 import android.view.*;
@@ -90,13 +91,20 @@ public class NodeDetailsFragment extends Fragment {
         showNameAndStatus();
         showStar();
         showFirmware();
+        bindClientCount();
+
         textRemoteId.setText(mNode.getRemoteId());
-        textClientCount.setText("" + mNode.getClientcount());
         textMacs.setText(mNode.getMacs());
         textGateway.setText(mNode.isGateway() + "");
         textClient.setText(mNode.isClient() + "");
         textCoordinates.setText(mNode.getLat() + ", " + mNode.getLon());
         LOGGER.debug("showData() done");
+    }
+
+    private void bindClientCount() {
+        Resources res = getResources();
+        int clientcount = mNode.getClientcount();
+        textClientCount.setText(res.getQuantityString(R.plurals.clientLabel, clientcount, clientcount));
     }
 
     private void showFirmware() {

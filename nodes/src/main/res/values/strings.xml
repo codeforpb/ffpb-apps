@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Nodes</string>
+    <string name="app_name">Knotenliste</string>
     <string name="accountType">net.freifunk.paderborn.nodes</string>
-    <string name="accountName">Freifunk Paderborn: Knoten</string>
+    <string name="accountName">Freifunk Paderborn: Knotenliste</string>
     <string name="search_hint">Suche Knoten</string>
     <string name="labelRemoteId">Remote Id:</string>
     <string name="labelClientCount">Client Count:</string>
@@ -10,4 +10,10 @@
     <string name="labelGateway">Gateway:</string>
     <string name="labelClient">Client:</string>
     <string name="labelCoordinates">Coordinates:</string>
+
+    <plurals
+        name="clientLabel">
+        <item quantity="one">%d Client</item>
+        <item quantity="other">%d Clients</item>
+    </plurals>
 </resources>
