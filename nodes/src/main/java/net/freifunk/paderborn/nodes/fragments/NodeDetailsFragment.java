@@ -30,7 +30,7 @@ public class NodeDetailsFragment extends Fragment {
     TextView textRemoteId, textClientCount, textFirmware, textMacs, textGateway, textClient, textCoordinates;
 
     @ColorRes
-    int nodeOnline, nodeOffline;
+    int nodeOnline, nodeOffline, firmwareDeprecated, firmareRecent;
 
     @OptionsMenuItem
     MenuItem abStar;
@@ -89,14 +89,25 @@ public class NodeDetailsFragment extends Fragment {
     void showData() {
         showNameAndStatus();
         showStar();
+        showFirmware();
         textRemoteId.setText(mNode.getRemoteId());
         textClientCount.setText("" + mNode.getClientcount());
-        textFirmware.setText(mNode.getFirmware());
         textMacs.setText(mNode.getMacs());
         textGateway.setText(mNode.isGateway() + "");
         textClient.setText(mNode.isClient() + "");
         textCoordinates.setText(mNode.getLat() + ", " + mNode.getLon());
         LOGGER.debug("showData() done");
+    }
+
+    private void showFirmware() {
+        textFirmware.setText(mNode.getFirmware());
+        final int firmwareTextColor;
+        if (mNode.isLegacy()) {
+            firmwareTextColor = firmwareDeprecated;
+        } else {
+            firmwareTextColor = firmareRecent;
+        }
+        textFirmware.setTextColor(firmwareTextColor);
     }
 
     private void showNameAndStatus() {

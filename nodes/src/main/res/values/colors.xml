@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="nodeOffline">#dd0000</color>
-    <color name="nodeOnline">#00aa00</color>
+    <color name="nodeOffline">@color/state_bad_red</color>
+    <color name="nodeOnline">@color/state_good_green</color>
+
+    <color name="firmwareDeprecated">@color/state_bad_red</color>
+    <color name="firmareRecent">@android:color/primary_text_dark</color>
 
     <color name="colorPrimary">@color/material_orange_300</color>
     <color name="colorPrimaryDark">@color/material_orange_600</color>
@@ -13,4 +16,7 @@
     <color name="material_orange_300">#FFB74D</color>
     <color name="material_orange_600">#FB8C00</color>
     <color name="material_green_A400">#00E676</color>
+
+    <color name="state_bad_red">#dd0000</color>
+    <color name="state_good_green">#00aa00</color>
 </resources>

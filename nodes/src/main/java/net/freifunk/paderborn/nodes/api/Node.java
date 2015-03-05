@@ -40,6 +40,7 @@ public class Node {
     @DatabaseField
     int clientcount = 0;
     @DatabaseField
+
     boolean legacy = false;
     @DatabaseField
     boolean gateway = false;
@@ -56,6 +57,10 @@ public class Node {
     private Date timeStamp;
 
     public Node() {
+    }
+
+    public boolean isLegacy() {
+        return legacy;
     }
 
     public boolean isGateway() {
