@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <TextView
-        android:id="@+id/labelClientCount"
+        android:id="@+id/textClientCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/labelRemoteId"
@@ -23,7 +23,7 @@
         android:id="@+id/labelFirmware"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/labelClientCount"
+        android:layout_below="@+id/textClientCount"
         android:text="@string/labelFirmware"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
@@ -72,15 +72,6 @@
         tool:text="ab:cd:ef:01:23:45"/>
 
     <TextView
-        android:id="@+id/textClientCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelClientCount"
-        android:layout_toEndOf="@+id/labelClientCount"
-        android:layout_toRightOf="@+id/labelClientCount"
-        tool:text="15"/>
-
-    <TextView
         android:id="@+id/textFirmware"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,4 +116,6 @@
         android:layout_toEndOf="@+id/labelCoordinates"
         android:layout_toRightOf="@+id/labelCoordinates"
         tool:text="coors"/>
+
+
 </RelativeLayout>

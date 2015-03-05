@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="textPrimary">#de000000</color>
+    <color name="textCaption">#8a000000</color>
     <color name="nodeOffline">@color/state_bad_red</color>
     <color name="nodeOnline">@color/state_good_green</color>
 
     <color name="firmwareDeprecated">@color/state_bad_red</color>
-    <color name="firmareRecent">@android:color/primary_text_dark</color>
+    <color name="firmareRecent">@android:color/primary_text_light</color>
 
     <color name="colorPrimary">@color/material_orange_300</color>
     <color name="colorPrimaryDark">@color/material_orange_600</color>
