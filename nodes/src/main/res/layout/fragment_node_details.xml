@@ -1,43 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tool="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/labelRemoteId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remote Id: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/labelClientCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelRemoteId"
+        android:text="Client Count: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/labelFirmware"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelClientCount"
+        android:text="Firmware: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+
+    <TextView
+        android:id="@+id/labelMacs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelFirmware"
+        android:text="Macs: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/labelGateway"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelMacs"
+        android:text="Gateway: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+
+    <TextView
+        android:id="@+id/labelClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelGateway"
+        android:text="Client: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/labelCoordinates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelClient"
+        android:text="Coordinates: "
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
 
     <TextView
         android:id="@+id/textRemoteId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelRemoteId"
+        android:layout_toRightOf="@+id/labelRemoteId"
+        tool:text="ab:cd:ef:01:23:45"/>
 
     <TextView
         android:id="@+id/textClientCount"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelClientCount"
+        android:layout_toRightOf="@+id/labelClientCount"
+        tool:text="15"/>
 
     <TextView
         android:id="@+id/textFirmware"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelFirmware"
+        android:layout_toRightOf="@+id/labelFirmware"
+        tool:text="0.4.0"/>
 
     <TextView
         android:id="@+id/textMacs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelMacs"
+        android:layout_toRightOf="@+id/labelMacs"
+        tool:text="ab:cd:ef:01:23:45"/>
 
 
     <TextView
         android:id="@+id/textGateway"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelGateway"
+        android:layout_toRightOf="@+id/labelGateway"
+        tool:text="gateway x"/>
 
     <TextView
         android:id="@+id/textClient"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelClient"
+        android:layout_toRightOf="@+id/labelClient"
+        tool:text="client"/>
 
     <TextView
         android:id="@+id/textCoordinates"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelCoordinates"
+        android:layout_toRightOf="@+id/labelCoordinates"
+        tool:text="coors"/>
+</RelativeLayout>

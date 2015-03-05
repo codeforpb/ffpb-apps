@@ -20,7 +20,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * Created by ljan on 07.02.15.
+ * Displays the details of one node.
  */
 @EFragment(R.layout.fragment_node_details)
 public class NodeDetailsFragment extends Fragment {

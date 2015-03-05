@@ -11,7 +11,7 @@ import org.androidannotations.annotations.*;
 import org.slf4j.*;
 
 /**
- * Created by ljan on 07.02.15.
+ * Host for a NodeDetailsFragment
  */
 @EActivity(R.layout.activity_node_details)
 @OptionsMenu(R.menu.star)
