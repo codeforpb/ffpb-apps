@@ -3,4 +3,11 @@
     <string name="accountType">net.freifunk.paderborn.nodes</string>
     <string name="accountName">Freifunk Paderborn: Knoten</string>
     <string name="search_hint">Suche Knoten</string>
+    <string name="labelRemoteId">Remote Id:</string>
+    <string name="labelClientCount">Client Count:</string>
+    <string name="labelFirmware">Firmware:</string>
+    <string name="labelMacs">Macs:</string>
+    <string name="labelGateway">Gateway:</string>
+    <string name="labelClient">Client:</string>
+    <string name="labelCoordinates">Coordinates:</string>
 </resources>
