@@ -16,28 +16,29 @@
         />
 
     <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
-        android:id="@+id/vgMaxNodes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vgCurrentNodes"
-        android:layout_marginTop="16dp"
-        custom:type="nodes"
-        />
-
-    <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
         android:id="@+id/vgCurrentClients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/vgMaxNodes"
+        android:layout_below="@+id/vgCurrentNodes"
         android:layout_marginTop="16dp"
         custom:type="clients"
         />
 
     <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
-        android:id="@+id/vgMaxClients"
+        android:id="@+id/vgMaxNodes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vgCurrentClients"
+        android:layout_marginTop="16dp"
+        custom:type="nodes"
+        />
+
+
+    <net.freifunk.paderborn.dashboard.views.KrombelStatViewGroup_
+        android:id="@+id/vgMaxClients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vgMaxNodes"
         android:layout_marginTop="16dp"
         custom:type="clients"
         />
@@ -48,6 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Clear DB"
-        android:visibility="gone"/>
+        android:visibility="@integer/clearDbButtonVisibility" />
 
 </RelativeLayout>
