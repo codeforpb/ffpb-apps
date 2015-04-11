@@ -10,7 +10,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
     defaultConfig {
-        applicationId "net.freifunk.paderborn.dashboard"
+        applicationId "net.freifunk.paderborn.krombel"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild

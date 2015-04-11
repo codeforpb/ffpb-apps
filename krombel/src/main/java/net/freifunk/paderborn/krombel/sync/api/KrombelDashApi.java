@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.dashboard.sync.api;
+package net.freifunk.paderborn.krombel.sync.api;
 
 import org.androidannotations.annotations.rest.*;
 import org.springframework.http.converter.json.*;

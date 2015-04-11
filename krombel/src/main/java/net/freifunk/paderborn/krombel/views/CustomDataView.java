@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.dashboard.views;
+package net.freifunk.paderborn.krombel.views;
 
 /**
  * FIXME doc

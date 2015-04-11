@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- gone in release -->
-    <integer name="clearDbButtonVisibility">0x8</integer>
+    <!-- gone in release - careful: values do NOT match with constants in view class -->
+    <integer name="clearDbButtonVisibility">2</integer>
 </resources>

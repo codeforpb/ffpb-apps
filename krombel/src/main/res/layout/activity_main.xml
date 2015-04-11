@@ -22,7 +22,7 @@
 
             <fragment
                 android:id="@+id/fragmentDash"
-                android:name="net.freifunk.paderborn.dashboard.KrombelFragment_"
+                android:name="net.freifunk.paderborn.krombel.KrombelFragment_"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/krombel_stats"/>

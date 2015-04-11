@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.dashboard;
+package net.freifunk.paderborn.krombel;
 
 import android.app.*;
 import android.test.*;

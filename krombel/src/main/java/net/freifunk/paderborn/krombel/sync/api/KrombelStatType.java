@@ -1,6 +1,6 @@
-package net.freifunk.paderborn.dashboard.sync.api;
+package net.freifunk.paderborn.krombel.sync.api;
 
-import net.freifunk.paderborn.dashboard.*;
+import net.freifunk.paderborn.krombel.R;
 
 /**
  * Different types of krombel's stats

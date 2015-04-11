@@ -1,4 +1,4 @@
-package net.freifunk.paderborn.dashboard;
+package net.freifunk.paderborn.krombel;
 
 import android.support.v4.app.*;
 import android.widget.*;
@@ -6,9 +6,9 @@ import android.widget.*;
 import com.j256.ormlite.android.apptools.*;
 import com.j256.ormlite.dao.*;
 
-import net.freifunk.paderborn.dashboard.persistence.*;
-import net.freifunk.paderborn.dashboard.sync.api.*;
-import net.freifunk.paderborn.dashboard.views.*;
+import net.freifunk.paderborn.krombel.persistence.*;
+import net.freifunk.paderborn.krombel.sync.api.*;
+import net.freifunk.paderborn.krombel.views.*;
 
 import org.androidannotations.annotations.*;
 
