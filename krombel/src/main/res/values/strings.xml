@@ -2,6 +2,7 @@
     <string name="app_name">Dashboard</string>
     <string name="accountName">Freifunk Paderborn: Dashboard</string>
     <string name="accountType">net.freifunk.paderborn.dashboard</string>
+    <string name="accountAuthority">de.krombel.dashing</string>
 
     <string name="titleKrombelStats">@string/app_name</string>
     <string name="descrCurrentNodes">Aktuelle Knotenanzahl: </string>
