@@ -1,13 +1,40 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:colorPrimary" tools:ignore="NewApi">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark" tools:ignore="NewApi">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent" tools:ignore="NewApi">@color/colorAccent</item>
+        <item name="colorPrimary" tools:ignore="NewApi">@color/colorPrimary</item>
+        <item name="colorPrimaryDark" tools:ignore="NewApi">@color/colorPrimaryDark</item>
+        <item name="colorAccent" tools:ignore="NewApi">@color/colorAccent</item>
     </style>
 
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:colorPrimary" tools:ignore="NewApi">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark" tools:ignore="NewApi">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent" tools:ignore="NewApi">@color/colorAccent</item>
+        <item name="colorPrimary" tools:ignore="NewApi">@color/colorPrimary</item>
+        <item name="colorPrimaryDark" tools:ignore="NewApi">@color/colorPrimaryDark</item>
+        <item name="colorAccent" tools:ignore="NewApi">@color/colorAccent</item>
     </style>
 
+    <style name="TransparentActionBarActivity" parent="AppTheme">
+        <item name="android:windowActionBarOverlay" tools:ignore="NewApi">true</item>
+        <item name="windowActionBarOverlay">true</item>
+
+        <item name="android:colorPrimary" tools:ignore="NewApi">@android:color/transparent</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+
+        <item name="android:actionBarTheme" tools:ignore="NewApi">@style/TransparentActionBar</item>
+        <item name="actionBarTheme">@style/TransparentActionBar</item>
+    </style>
+
+
+    <style name="TransparentActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

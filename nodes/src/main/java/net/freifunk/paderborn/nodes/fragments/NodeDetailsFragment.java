@@ -1,6 +1,5 @@
 package net.freifunk.paderborn.nodes.fragments;
 
-import android.content.res.*;
 import android.os.*;
 import android.support.v4.app.*;
 import android.view.*;
@@ -28,11 +27,15 @@ public class NodeDetailsFragment extends Fragment {
     public static final String KEY_ARG_ID = "KEY_ARG_ID";
     public static final Logger LOGGER = LoggerFactory.getLogger(NodeDetailsFragment.class);
     @ViewById
-    TextView textRemoteId, textClientCount, textFirmware, textMacs, textGateway, textClient, textCoordinates;
-
+    TextView textRemoteId, textClientCount, textFirmware, textCoordinates;
     @ColorRes
     int nodeOnline, nodeOffline, firmwareDeprecated, firmareRecent;
 
+    @ViewById
+    ImageButton imgButtonStarred;
+
+    @ViewById
+    FrameLayout frameNodeStatus;
     @OptionsMenuItem
     MenuItem abStar;
 
@@ -94,17 +97,13 @@ public class NodeDetailsFragment extends Fragment {
         bindClientCount();
 
         textRemoteId.setText(mNode.getRemoteId());
-        textMacs.setText(mNode.getMacs());
-        textGateway.setText(mNode.isGateway() + "");
-        textClient.setText(mNode.isClient() + "");
         textCoordinates.setText(mNode.getLat() + ", " + mNode.getLon());
         LOGGER.debug("showData() done");
     }
 
     private void bindClientCount() {
-        Resources res = getResources();
         int clientcount = mNode.getClientcount();
-        textClientCount.setText(res.getQuantityString(R.plurals.clientLabel, clientcount, clientcount));
+        textClientCount.setText("" + clientcount);
     }
 
     private void showFirmware() {
@@ -119,8 +118,10 @@ public class NodeDetailsFragment extends Fragment {
     }
 
     private void showNameAndStatus() {
-        int onlineStatusColor = (mNode.isOnline()) ? nodeOnline : nodeOffline;
-        host.setToolbarInfos(mNode.getName(), onlineStatusColor);
+        int circle = (mNode.isOnline()) ? R.drawable.circle_online: R.drawable.circle_offline;
+        frameNodeStatus.setBackgroundResource(circle);
+        imgButtonStarred.setBackgroundResource(circle);
+        host.getSupportActionBar().setTitle(mNode.getName());
     }
 
     @Override

@@ -1,121 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tool="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageTopBackground"
+        android:minHeight="216dp"
+        android:src="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <FrameLayout
+        android:layout_width="96dp"
+        android:id="@+id/frameNodeStatus"
+              android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_height="96dp"
+        android:background="@drawable/circle_online">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tool:text="123"
+            android:id="@+id/textClientCount"
+            style="@style/Base.TextAppearance.AppCompat.Headline"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Clients"
+            android:id="@+id/textClientLabel"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal|bottom" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tool:text="Online"
+            android:id="@+id/textOnlineState"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal|top" />
+    </FrameLayout>
+
+
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imgButtonStarred"
+        android:layout_marginTop="192dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:elevation="10dp"
+        android:background="@drawable/circle_online"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_action_important"
+        android:adjustViewBounds="false"
+        android:scaleType="fitXY"
+        android:padding="4dp" />
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:id="@+id/imageViewInfo"
+        android:layout_below="@+id/imgButtonStarred"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_action_about_light"
+        android:padding="8dp" />
 
     <TextView
-        android:id="@+id/labelRemoteId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/labelRemoteId"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Statusseite"
+        android:id="@+id/textRemoteIdLabel"
+        android:layout_alignTop="@+id/imageViewInfo"
+        android:layout_toRightOf="@+id/imageViewInfo"
+        android:layout_toEndOf="@+id/imageViewInfo"
+        android:layout_marginTop="17dp" />
 
     <TextView
-        android:id="@+id/textClientCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/labelRemoteId"
-        android:text="@string/labelClientCount"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-    <TextView
-        android:id="@+id/labelFirmware"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textClientCount"
-        android:text="@string/labelFirmware"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-
-    <TextView
-        android:id="@+id/labelMacs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/labelFirmware"
-        android:text="@string/labelMacs"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-    <TextView
-        android:id="@+id/labelGateway"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/labelMacs"
-        android:text="@string/labelGateway"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-
-    <TextView
-        android:id="@+id/labelClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/labelGateway"
-        android:text="@string/labelClient"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-    <TextView
-        android:id="@+id/labelCoordinates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/labelClient"
-        android:text="@string/labelCoordinates"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-
-    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tool:text="12:34:56:78:9A:BC"
         android:id="@+id/textRemoteId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelRemoteId"
-        android:layout_toEndOf="@+id/labelRemoteId"
-        android:layout_toRightOf="@+id/labelRemoteId"
-        tool:text="ab:cd:ef:01:23:45"/>
+        android:layout_below="@+id/textRemoteIdLabel"
+        android:layout_toRightOf="@+id/imageViewInfo"
+        android:layout_toEndOf="@+id/imageViewInfo" />
+
+    <ImageView
+        android:id="@+id/imageViewMap"
+        android:layout_below="@+id/imageViewInfo"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_action_map_light"
+        android:padding="8dp" />
 
     <TextView
-        android:id="@+id/textFirmware"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelFirmware"
-        android:layout_toEndOf="@+id/labelFirmware"
-        android:layout_toRightOf="@+id/labelFirmware"
-        tool:text="0.4.0"/>
-
-    <TextView
-        android:id="@+id/textMacs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelMacs"
-        android:layout_toEndOf="@+id/labelMacs"
-        android:layout_toRightOf="@+id/labelMacs"
-        tool:text="ab:cd:ef:01:23:45"/>
-
-
-    <TextView
-        android:id="@+id/textGateway"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelGateway"
-        android:layout_toEndOf="@+id/labelGateway"
-        android:layout_toRightOf="@+id/labelGateway"
-        tool:text="gateway x"/>
-
-    <TextView
-        android:id="@+id/textClient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelClient"
-        android:layout_toEndOf="@+id/labelClient"
-        android:layout_toRightOf="@+id/labelClient"
-        tool:text="client"/>
-
-    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tool:text="51.3456, 8.91011"
         android:id="@+id/textCoordinates"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/imageViewInfo"
+        android:layout_toRightOf="@+id/imageViewMap"
+        android:layout_toEndOf="@+id/imageViewMap"
+        android:layout_marginTop="16dp" />
+
+    <ImageView
+        android:id="@+id/imageViewGear"
+        android:layout_below="@+id/imageViewMap"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_action_settings_light"
+        android:padding="8dp" />
+
+   <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelCoordinates"
-        android:layout_toEndOf="@+id/labelCoordinates"
-        android:layout_toRightOf="@+id/labelCoordinates"
-        tool:text="coors"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Firmware"
+        android:id="@+id/textFirmwareLabel"
+        android:layout_below="@+id/imageViewMap"
+        android:layout_toRightOf="@+id/imageViewGear"
+        android:layout_toEndOf="@+id/imageViewGear"
+        android:layout_marginTop="16dp" />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tool:text="0.49.12"
+        android:id="@+id/textFirmware"
+        android:layout_below="@+id/textFirmwareLabel"
+        android:layout_toRightOf="@+id/imageViewGear"
+        android:layout_toEndOf="@+id/imageViewGear" />
 </RelativeLayout>
