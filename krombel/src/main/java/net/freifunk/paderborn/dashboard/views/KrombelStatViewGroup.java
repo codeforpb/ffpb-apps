@@ -26,13 +26,27 @@ public class KrombelStatViewGroup extends RelativeLayout implements CustomDataVi
 
     public void bind(KrombelStat stat) {
         if (stat == null) {
-            textStatName.setText("");
-            textStatValue.setText("");
-            textStatDate.setText("");
+            bindNull();
         } else {
-            textStatName.setText(stat.getType().stringResId);
-            textStatValue.setText(stat.getCount() + "");
-            textStatDate.setText(sdf.format(stat.getTimestamp()));
+            bindNonNull(stat);
+        }
+
+
+    }
+
+    private void bindNull() {
+        textStatName.setText("");
+        textStatValue.setText("");
+        textStatDate.setText("");
+    }
+
+    private void bindNonNull(KrombelStat stat) {
+        textStatName.setText(stat.getType().stringResId);
+        textStatValue.setText(stat.getCount() + "");
+        textStatDate.setText(sdf.format(stat.getTimestamp()));
+        if (stat.getType() == KrombelStatType.CURRENT_CLIENTS
+                || stat.getType() == KrombelStatType.CURRENT_NODES) {
+            textStatDate.setVisibility(INVISIBLE);
         }
     }
 }
