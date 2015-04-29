@@ -1,12 +1,12 @@
-ffpb-apps
-=========
+# ffpb-apps
+
 
 Apps, die sich rund um Freifunk Paderborn drehen. Download und Updates der Apps vorerst nur unter http://ironjan.de/category/all/projects/ffpb/
 
 **Krombels Dashboard:** Bringt http://dashing.krombel.de/stats auf Android. 
 
-License
-=======
+# License
+
 Copyright 2014 Jan Lippert
 
 Licensed under the Apache License, Version 2.0 (the "License");
